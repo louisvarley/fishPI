@@ -4,7 +4,6 @@ import configparser
 
 from fishPI import logging
 
-
 title = ""
 ui_version = 2
 port = 5555

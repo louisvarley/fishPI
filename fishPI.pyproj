@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Raspberry PI.pubxml" />
+    <Content Include="config.ini" />
     <Content Include="fishPI\yaml\lighting\setBrightness.yaml" />
     <Content Include="fishPI\yaml\lighting\getBrightness.yaml" />
     <Content Include="README.md" />

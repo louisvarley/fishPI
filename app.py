@@ -61,6 +61,10 @@ def main():
     #Import all views, controllers, models and services 
     from fishPI import views, controllers, models, services
 
+    if(False == fishPI.services.database.database_exists()):
+        logging.loggingService.logInfo(" * Creating Database")
+        fishPI.services.database.create_schema()
+
     fishPI.app.run(host=fishPI.config.host, port=fishPI.config.port, debug=True)
 
 if __name__ == '__main__':
