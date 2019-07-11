@@ -13,5 +13,16 @@ class lighting():
 
         return jsonify(
             channel=channel,
-            brightness=100
+            brightness=fishPI.services.lighting.get_brightness(channel)
         )
+
+    @fishPI.app.route('/lighting/setBrightness/', methods=['GET'])
+    @fishPI.load("lighting","setBrightness")  
+    def set_brightness():
+
+        channel = request.args.get('channel')
+        percentage = request.args.get('percentage')
+
+        fishPI.services.lighting.set_brightness(channel,percentage)
+
+        return True

@@ -83,6 +83,9 @@
   <ItemGroup>
     <None Include="Raspberry PI.pubxml" />
     <Content Include="config.ini" />
+    <Content Include="fishPI\yaml\lighting\doSchedule.yaml" />
+    <Content Include="fishPI\yaml\lighting\setSchedule.yaml" />
+    <Content Include="fishPI\yaml\lighting\getSchedule.yaml" />
     <Content Include="fishPI\yaml\lighting\setBrightness.yaml" />
     <Content Include="fishPI\yaml\lighting\getBrightness.yaml" />
     <Content Include="README.md" />

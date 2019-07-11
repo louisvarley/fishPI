@@ -1,0 +1,13 @@
+    tags:
+      - Lighting
+    parameters:
+      - name: schedule
+        in: body
+        type: string
+        required: true
+        description: Channel Number
+      - name: channel
+        in: query
+        type: integer
+        required: true
+        description: Channel Number
