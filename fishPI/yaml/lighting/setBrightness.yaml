@@ -1,0 +1,13 @@
+    tags:
+      - Lighting
+    parameters:
+      - name: channel
+        in: query
+        type: integer
+        required: true
+        description: Channel Number
+      - name: percentage
+        in: query
+        type: integer
+        required: true
+        description: Light Brightness Percentage

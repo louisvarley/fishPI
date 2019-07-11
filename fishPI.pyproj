@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>e1073813-e087-4a2a-b4f8-c5eb1f0abaa4</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>app.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Web launcher</LaunchProvider>
+    <WebBrowserUrl>http://localhost:54001/apidocs/</WebBrowserUrl>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+    <Name>fishPI</Name>
+    <RootNamespace>fishPI</RootNamespace>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="app.py" />
+    <Compile Include="fishPI\controllers\lighting.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="fishPI\controllers\system.py" />
+    <Compile Include="fishPI\controllers\temperature.py" />
+    <Compile Include="fishPI\controllers\water.py" />
+    <Compile Include="fishPI\controllers\weather.py" />
+    <Compile Include="fishPI\controllers\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="fishPI\logging.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="fishPI\config.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="fishPI\models\__init__.py" />
+    <Compile Include="fishPI\services\database.py" />
+    <Compile Include="fishPI\services\lighting.py" />
+    <Compile Include="fishPI\services\temperature.py" />
+    <Compile Include="fishPI\services\water.py" />
+    <Compile Include="fishPI\services\system.py" />
+    <Compile Include="fishPI\services\weather.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="fishPI\services\__init__.py" />
+    <Compile Include="fishPI\views\__init__.py" />
+    <Compile Include="fishPI\__init__.py" />
+    <Compile Include="setup.py" />
+    <Compile Include="__version__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="fishPI\" />
+    <Folder Include="fishPI\controllers\" />
+    <Folder Include="fishPI\models\" />
+    <Folder Include="fishPI\yaml\" />
+    <Folder Include="fishPI\services\" />
+    <Folder Include="fishPI\views\" />
+    <Folder Include="fishPI\static\" />
+    <Folder Include="fishPI\static\content\" />
+    <Folder Include="fishPI\static\fonts\" />
+    <Folder Include="fishPI\static\scripts\" />
+    <Folder Include="fishPI\templates\" />
+    <Folder Include="fishPI\yaml\lighting\" />
+    <Folder Include="fishPI\yaml\database\" />
+    <Folder Include="fishPI\yaml\weather\" />
+    <Folder Include="fishPI\yaml\water\" />
+    <Folder Include="fishPI\yaml\temperature\" />
+    <Folder Include="fishPI\yaml\system\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Raspberry PI.pubxml" />
+    <Content Include="fishPI\yaml\lighting\setBrightness.yaml" />
+    <Content Include="fishPI\yaml\lighting\getBrightness.yaml" />
+    <Content Include="README.md" />
+    <Content Include="requirements.txt" />
+    <Content Include="fishPI\static\content\bootstrap.css" />
+    <Content Include="fishPI\static\content\bootstrap.min.css" />
+    <Content Include="fishPI\static\content\site.css" />
+    <Content Include="fishPI\static\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fishPI\static\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fishPI\static\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fishPI\static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fishPI\static\scripts\bootstrap.js" />
+    <Content Include="fishPI\static\scripts\bootstrap.min.js" />
+    <Content Include="fishPI\static\scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="fishPI\static\scripts\jquery-1.10.2.js" />
+    <Content Include="fishPI\static\scripts\jquery-1.10.2.min.js" />
+    <Content Include="fishPI\static\scripts\jquery-1.10.2.min.map" />
+    <Content Include="fishPI\static\scripts\jquery.validate-vsdoc.js" />
+    <Content Include="fishPI\static\scripts\jquery.validate.js" />
+    <Content Include="fishPI\static\scripts\jquery.validate.min.js" />
+    <Content Include="fishPI\static\scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="fishPI\static\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="fishPI\static\scripts\modernizr-2.6.2.js" />
+    <Content Include="fishPI\static\scripts\respond.js" />
+    <Content Include="fishPI\static\scripts\respond.min.js" />
+    <Content Include="fishPI\static\scripts\_references.js" />
+    <Content Include="fishPI\templates\about.html" />
+    <Content Include="fishPI\templates\contact.html" />
+    <Content Include="fishPI\templates\index.html" />
+    <Content Include="fishPI\templates\layout.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.6</Version>
+      <Description>env (Python 3.6 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

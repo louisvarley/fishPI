@@ -1,2 +1,2 @@
-# FishPI
-A Python Flask, Flasgger, Swagger API Server and dashboard for a touch screen aquarium controller 
+<!-- start_ppi_description -->
+<!-- stop_ppi_description -->

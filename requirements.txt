@@ -1,0 +1,6 @@
+flasgger
+flask
+requests
+sh
+pbs
+werkzeug 
