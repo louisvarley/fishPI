@@ -15,23 +15,25 @@ def before_launch():
         return redirect("/apidocs/", code=302)
 
 def main():
-
+    #Pre-Set Config 
     fishPI.config.working_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
     fishPI.config.app_dir = os.path.join(fishPI.config.working_dir,"fishPI")
-    fishPI.config.title = fishPI.config.load_from_config("instance","title")
-    fishPI.config.ui_version = fishPI.config.load_from_config("instance","swagger_ui_version")
     fishPI.config.version = fishPI.config.get_version()
     fishPI.config.host_name = str(platform.uname()[1])
     fishPI.config.host = environ.get('SERVER_HOST', '0.0.0.0')
     fishPI.config.database = os.path.join(fishPI.config.working_dir,fishPI.config.load_from_config("instance","database_file_name"))
 
+    #INI File Config
+    fishPI.config.title = fishPI.config.load_from_config("instance","title")
+    fishPI.config.ui_version = fishPI.config.load_from_config("instance","swagger_ui_version")
     fishPI.config.port = fishPI.config.load_from_config("instance","port");
     fishPI.config.light_pins = fishPI.config.load_from_config("light_pins")
 
     ssl._create_default_https_context = ssl._create_unverified_context
 
     fishPI.app = Flask(__name__)
- 
+
+    #Used for Loading YAMLS
     fishPI.load = lambda controller, definition: swag_from(os.path.join(fishPI.config.app_dir, "yaml", controller, definition + ".yaml"))
 
     fishPI.app.config['SWAGGER'] = {
@@ -56,14 +58,10 @@ def main():
     Swagger(fishPI.app)
     before_launch()
    
-    logging.loggingService.logInfo(" * Starting " + fishPI.config.title + " [" + fishPI.config.host + ":" + str(fishPI.config.port) + "]")
+    logging.logInfo(" * Starting " + fishPI.config.title + " [" + fishPI.config.host + ":" + str(fishPI.config.port) + "]")
 
     #Import all views, controllers, models and services 
     from fishPI import views, controllers, models, services
-
-    if(False == fishPI.services.database.database_exists()):
-        logging.loggingService.logInfo(" * Creating Database")
-        fishPI.services.database.create_schema()
 
     fishPI.app.run(host=fishPI.config.host, port=fishPI.config.port, debug=True)
 

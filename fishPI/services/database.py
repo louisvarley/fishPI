@@ -7,8 +7,10 @@ from fishPI import logging
 from fishPI import services
 from fishPI import config
 
-conn = None
-
+def load():
+    logging.logInfo(" * Creating New Database")
+    create_schema()
+        
 def close_conn(conn):
     try:
         conn.close()
@@ -26,6 +28,7 @@ def create_table(create_table_sql):
     conn = create_conn()
     c = conn.cursor()
     c.execute(create_table_sql)
+    conn.commit()
     print("executed")
     close_conn(conn)
 
@@ -47,20 +50,27 @@ def key_count(key):
         conn = create_conn()
         cur = conn.cursor()
         cur.execute("SELECT COUNT(*) FROM meta WHERE key=?", (key,))
-        result=cursor.fetchone()
+        result=cur.fetchone()
         close_conn(conn)
         return result[0]
 
-def save_meta(key, value, unique = True):
+def set_initial(key,value):
+    set_meta(key, value, True, True)
 
+def set_meta(key, value, unique = True, if_not_exists = False):
     meta = (key, value)
+
+    if(key_count(key) > 0 and if_not_exists):
+        return True
 
     if(unique and key_count(key) > 0):
 
         sql = ''' UPDATE meta set value = ? where key = ? '''
+        print("updating somthig")
         conn = create_conn()
         cur = conn.cursor()
         cur.execute(sql, meta)
+        conn.commit()
         close_conn(conn)
         return True
 
@@ -69,8 +79,10 @@ def save_meta(key, value, unique = True):
         sql = ''' INSERT INTO meta(key,value)
                 VALUES(?,?) '''
         conn = create_conn()
+        print("inserting something")
         cur = conn.cursor()
         cur.execute(sql, meta)
+        conn.commit()
         close_conn(conn)
         return cur.lastrowid
 

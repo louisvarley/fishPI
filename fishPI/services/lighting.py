@@ -1,6 +1,16 @@
 import fishPI
 from fishPI import logging
 from fishPI import services
+from fishPI import models
+
+def load():
+    logging.logInfo(" * Loading lighting service")
+
+    channel = 0
+    while channel < len(fishPI.config.light_pins) :
+        channel = channel + 1
+        services.database.set_initial("{}_brightness".format(channel),0)
+        services.database.set_initial("{}_schedule".format(channel),models.light_schedule.light_schedule().toJSON())
 
 def light_channel_meta(channel):
     return "brightness_channel_{}".format(channel)
