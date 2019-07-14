@@ -1,2 +1,1 @@
-import fishPI.models.hour_schedule
-import fishPI.models.light_schedule
+import fishPI.models.lighting

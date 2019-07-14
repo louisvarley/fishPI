@@ -1,4 +1,6 @@
 import fishPI
+import fishPI.models
+import fishPI.models.database
 import sqlite3
 import os
 
@@ -7,8 +9,8 @@ from fishPI import logging
 from fishPI import services
 from fishPI import config
 
+
 def load():
-    logging.logInfo(" * Creating New Database")
     create_schema()
         
 def close_conn(conn):
@@ -29,12 +31,13 @@ def create_table(create_table_sql):
     c = conn.cursor()
     c.execute(create_table_sql)
     conn.commit()
-    print("executed")
     close_conn(conn)
 
 def create_schema():
     if(database_exists()):
         return True
+
+    logging.logInfo(" * Creating Database")
 
     sql_create_meta_table = """ CREATE TABLE IF NOT EXISTS meta (
                                     id INTEGER PRIMARY KEY,
@@ -47,44 +50,46 @@ def create_schema():
     close_conn(conn)
 
 def key_count(key):
-        conn = create_conn()
-        cur = conn.cursor()
-        cur.execute("SELECT COUNT(*) FROM meta WHERE key=?", (key,))
-        result=cur.fetchone()
-        close_conn(conn)
-        return result[0]
+    conn = create_conn()
+    cur = conn.cursor()
+    cur.execute("SELECT COUNT(*) FROM meta WHERE key=?", (key,))
+    result=cur.fetchone()
+    close_conn(conn)
+    return result[0]
 
 def set_initial(key,value):
     set_meta(key, value, True, True)
 
 def set_meta(key, value, unique = True, if_not_exists = False):
-    meta = (key, value)
+
+    key = str(key)
+    value = str(value)
+
+
 
     if(key_count(key) > 0 and if_not_exists):
         return True
 
     if(unique and key_count(key) > 0):
-
+        meta = (value, key)
         sql = ''' UPDATE meta set value = ? where key = ? '''
-        print("updating somthig")
         conn = create_conn()
         cur = conn.cursor()
         cur.execute(sql, meta)
         conn.commit()
         close_conn(conn)
-        return True
+        return get_meta(key,unique)
 
     else:
-
+        meta = (key, value)
         sql = ''' INSERT INTO meta(key,value)
                 VALUES(?,?) '''
         conn = create_conn()
-        print("inserting something")
         cur = conn.cursor()
         cur.execute(sql, meta)
         conn.commit()
         close_conn(conn)
-        return cur.lastrowid
+        return get_meta(key,unique)
 
 def get_meta(key, unique = True):
         conn = create_conn()
@@ -92,11 +97,12 @@ def get_meta(key, unique = True):
         cur.execute("SELECT id, key, value, added FROM meta WHERE key=?", (key,))
 
         if(unique):
-            result=cursor.fetchone()
+            result=cur.fetchone()
             close_conn(conn)
-            return result[0]
+            return fishPI.models.database.meta(result[1],result[2],result[3])
         else:
-            result=cursor.fetchall()
+            result=cur.fetchone()
+            result=cur.fetchall()
             close_conn(conn)
             return result
          

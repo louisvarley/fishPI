@@ -12,7 +12,8 @@
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <LaunchProvider>Web launcher</LaunchProvider>
-    <WebBrowserUrl>http://localhost:54001/apidocs/</WebBrowserUrl>
+    <WebBrowserUrl>
+    </WebBrowserUrl>
     <OutputPath>.</OutputPath>
     <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
     <Name>fishPI</Name>
@@ -46,10 +47,10 @@
     <Compile Include="fishPI\config.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="fishPI\models\hour_schedule.py" />
-    <Compile Include="fishPI\models\light_schedule.py">
+    <Compile Include="fishPI\models\database.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="fishPI\models\lighting.py" />
     <Compile Include="fishPI\models\__init__.py" />
     <Compile Include="fishPI\services\database.py" />
     <Compile Include="fishPI\services\lighting.py" />
