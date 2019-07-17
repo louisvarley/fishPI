@@ -4,20 +4,30 @@ from fishPI import config, logging
 from time import sleep
 from os import environ
 from urllib.request import urlopen
-from flask import Flask, redirect
+from flask import Flask, redirect, render_template
 from flasgger.utils import swag_from
 from flasgger import Swagger
 from multiprocessing import Process, Queue
+
+#http://symbiot4.creatingo.com/
 
 def before_launch():
     @fishPI.app.route('/api')
     def root():
         return redirect("/apidocs/", code=302)
 
+    @fishPI.app.route('/')
+    def render_static():
+        return render_template("index.html")
+
+
+
 def main():
     #Pre-Set Config 
     fishPI.config.working_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
     fishPI.config.app_dir = os.path.join(fishPI.config.working_dir,"fishPI")
+    fishPI.config.template_dir = os.path.join(fishPI.config.app_dir,"templates")
+    fishPI.config.static_dir = os.path.join(fishPI.config.app_dir,"static")
     fishPI.config.version = fishPI.config.get_version()
     fishPI.config.host_name = str(platform.uname()[1])
     fishPI.config.host = environ.get('SERVER_HOST', '0.0.0.0')
@@ -31,7 +41,7 @@ def main():
 
     ssl._create_default_https_context = ssl._create_unverified_context
 
-    fishPI.app = Flask(__name__)
+    fishPI.app = Flask(__name__,template_folder=fishPI.config.template_dir,static_folder = fishPI.config.static_dir)
 
     #Used for Loading YAMLS
     fishPI.load = lambda controller, definition: swag_from(os.path.join(fishPI.config.app_dir, "yaml", controller, definition + ".yaml"))

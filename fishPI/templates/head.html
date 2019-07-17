@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Jozef Dvorský - creatingo.com">
+    <title>FishPI Dashboard</title>
+
+	<!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Style -->
+    <link href="/static/css/style.css" rel="stylesheet">
+
+	<!-- FA -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    
+	<!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap bundle -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	<!-- FishPI Base -->
+    <script src="/static/js/fishpi.base.js" ></script>
+
+	<script>
+	
+	$(function() {
+		if(!window.location.toString().includes("localhost")){	
+			setTimeout(function() {
+				location.reload();
+			}, 9000);
+		}		
+	});
+	
+	$(function() {
+	jQuery('#main').height(jQuery(window).height());
+	
+	jQuery('#notice-bar').height(jQuery(window).height() - jQuery('#footer-bar').height());
+	
+		
+	
+	
+	});
+	</script>
+
+</head>
+
+<body>
+    {% block content %}{% endblock %}    
+</body>
+</html>
