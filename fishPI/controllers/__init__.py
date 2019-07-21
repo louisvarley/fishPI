@@ -1,1 +1,1 @@
-import fishPI.controllers.lighting
+from fishPI.controllers import lighting

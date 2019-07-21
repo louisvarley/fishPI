@@ -1,4 +1,4 @@
-import fishPI, os, platform, ssl, sys
+import fishPI, subprocess, os, platform, ssl, sys
 
 from fishPI import config, logging
 from time import sleep
@@ -19,8 +19,6 @@ def before_launch():
     @fishPI.app.route('/')
     def render_static():
         return render_template("index.html")
-
-
 
 def main():
     #Pre-Set Config 
@@ -67,7 +65,9 @@ def main():
 
     Swagger(fishPI.app)
     before_launch()
-   
+
+    user = os.getenv("SUDO_USER")
+
     logging.logInfo(" * Starting " + fishPI.config.title + " [" + fishPI.config.host + ":" + str(fishPI.config.port) + "]")
 
     #Import all views, controllers, models and services 

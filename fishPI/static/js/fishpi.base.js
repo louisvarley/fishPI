@@ -1,23 +1,37 @@
+/* Initialise FishPI */
+var fishpi = {}
 
-jQuery( document ).ready(function() {
+fishpi.init = function(func){
 	
-	/* On Load */
-	refreshScreen();
+	jQuery( document ).ready(function() {
+		func();
+	})
 	
-	/* Screen Change */
+}
+
+fishpi.refreshScreen = function(){
+		
+	screen = jQuery('.screen-btn').filter('.active').data('screen');
+	jQuery('.screen').hide();	
+	jQuery('#' + screen).fadeIn();
+
+}
+
+fishpi.init(function(){
+	
+	fishpi.refreshScreen();
+	
     jQuery('.screen-btn').click(function(){
 		jQuery('.screen-btn').removeClass('active');
 		jQuery(this).addClass('active');
-		refreshScreen();
+		fishpi.refreshScreen();
 	});
-});
-
-var refreshScreen = function(){
 	
-	screen = jQuery('.screen-btn').filter('.active').data('screen');
+	jQuery('#main').height(jQuery(window).height());	
+	jQuery('#notice-bar').height(jQuery(window).height() - jQuery('#footer-bar').height());
 	
-	jQuery('.screen').hide();
-		
-		jQuery('#' + screen).fadeIn();
+})
 
-}
+
+
+

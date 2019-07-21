@@ -88,9 +88,20 @@
   <ItemGroup>
     <None Include="Raspberry PI.pubxml" />
     <Content Include="config.ini" />
+    <Content Include="fishPI\static\css\highchart.css" />
+    <Content Include="fishPI\static\css\responsive.css" />
+    <Content Include="fishPI\static\css\screens.css" />
+    <Content Include="fishPI\static\css\style - Copy.css" />
     <Content Include="fishPI\static\css\style.css" />
+    <Content Include="fishPI\static\css\variables.css" />
+    <Content Include="fishPI\static\js\fishpi.api.js" />
     <Content Include="fishPI\static\js\fishpi.base.js" />
+    <Content Include="fishPI\static\js\fishpi.lighting.js" />
+    <Content Include="fishPI\static\scss\highchart.scss" />
+    <Content Include="fishPI\static\scss\responsive.scss" />
+    <Content Include="fishPI\static\scss\screens.scss" />
     <Content Include="fishPI\static\scss\style.scss" />
+    <Content Include="fishPI\static\scss\variables.scss" />
     <Content Include="fishPI\templates\ambients.html" />
     <Content Include="fishPI\templates\footer.html" />
     <Content Include="fishPI\templates\head.html" />
@@ -100,6 +111,8 @@
     <Content Include="fishPI\templates\system.html" />
     <Content Include="fishPI\templates\temperature.html" />
     <Content Include="fishPI\templates\water.html" />
+    <Content Include="setup.sh" />
+    <Content Include="init.sh" />
     <Content Include="fishPI\yaml\lighting\doSchedule.yaml" />
     <Content Include="fishPI\yaml\lighting\setSchedule.yaml" />
     <Content Include="fishPI\yaml\lighting\getSchedule.yaml" />

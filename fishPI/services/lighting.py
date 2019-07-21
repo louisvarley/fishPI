@@ -23,6 +23,9 @@ def channel_to_pin(channel):
 def get_schedule(channel):
     return fishPI.services.database.get_meta(schedule_channel_meta(channel))
 
+def set_schedule(channel, schedule):
+    return fishPI.services.database.set_meta(schedule_channel_meta(channel), schedule)
+
 def get_brightness(channel):
     return fishPI.services.database.get_meta(light_channel_meta(channel))
 
