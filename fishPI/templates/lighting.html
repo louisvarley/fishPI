@@ -1,50 +1,75 @@
-<div class="screen" id="lighting">
-	<div class="row lighting-channels">
-		<div data-channel="1" class="col-md-1 lighting-btn active">
-			<div class="icon"><i class="fas fa-sun"></i></div>
-			<span>1</span>
-		</div>
-		
-		<div data-channel="2" class="col-md-1 lighting-btn">
-			<div class="icon"><i class="fas fa-sun"></i></div>
-			<span>2</span>
-		</div>
+<div class="screen hide-notifications" id="lighting">
 
-		<div data-channel="3" class="col-md-1 lighting-btn">
-			<div class="icon"><i class="fas fa-sun"></i></div>
-			<span>3</span>
-		</div>
-		
-		<div data-channel="4" class="col-md-1 lighting-btn">
-			<div class="icon"><i class="fas fa-sun"></i></div>
-			<span>4</span>
-		</div>
+    <div id="lighting-options">
+        <button type="button" id="btn-lighting-options" class="btn btn-lg btn-primary"><i class="fas fa-cog"></i></button>
+        <div id="btn-lighting-actions" role="group">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="btn-lighting-copy" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Copy Schedule</button>
+                <div id="lighting-channels-copy" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="btn-group-vertical">
+                        <button data-channel="1" class="dropdown-item btn btn-lg btn-primary">1</button>
+                        <button data-channel="2" class="dropdown-item btn btn-lg btn-primary">2</button>
+                        <button data-channel="3" class="dropdown-item btn btn-lg btn-primary">3</button>
+                        <button data-channel="4" class="dropdown-item btn btn-lg btn-primary">4</button>
+                        <button data-channel="5" class="dropdown-item btn btn-lg btn-primary">5</button>
+                        <button data-channel="6" class="dropdown-item btn btn-lg btn-primary">6</button>
+                        <button data-channel="7" class="dropdown-item btn btn-lg btn-primary">7</button>
+                        <button data-channel="8" class="dropdown-item btn btn-lg btn-primary">8</button>
+                        <button data-channel="9" class="dropdown-item btn btn-lg btn-primary">9</button>
+                    </div>
+                </div>
+            <button type="button" id="btn-lighting-flash" class="btn-lighting-action btn-lg btn btn-primary">Flash</button>
+        </div>
+    </div>
 
-		<div data-channel="5" class="col-md-1 lighting-btn">
-			<div class="icon"><i class="fas fa-sun"></i></div>
-			<span>5</span>
-		</div>
+    <div class="row lighting-channels" style="white-space: nowrap; display: inline-block;">
+        <div data-channel="1" class="col-md-2 lighting-btn active">
+            <div class="icon"><i class="fas fa-sun"></i></div>
+            <span>1</span>
+        </div>
 
-		<div data-channel="6" class="col-md-1 lighting-btn">
-			<div class="icon"><i class="fas fa-sun"></i></div>
-			<span>6</span>
-		</div>		
-		<div data-channel="7" class="col-md-1 lighting-btn">
-			<div class="icon"><i class="fas fa-sun"></i></div>
-			<span>7</span>
-		</div>			
-		<div data-channel="8" class="col-md-1 lighting-btn">
-			<div class="icon"><i class="fas fa-moon"></i></div>
-			<span>8</span>
-		</div>	
-		<div data-channel="9" class="col-md-1 lighting-btn">
-			<div class="icon"><i class="fas fa-moon"></i></div>
-			<span>9</span>
-		</div>			
-	</div>
-	<div class="row">
-		<div id="lighting-channel-editor"></div>
-	</div>
-	
-	
+        <div data-channel="2" class="col-md-2 lighting-btn">
+            <div class="icon"><i class="fas fa-sun"></i></div>
+            <span>2</span>
+        </div>
+
+        <div data-channel="3" class="col-md-2 lighting-btn">
+            <div class="icon"><i class="fas fa-sun"></i></div>
+            <span>3</span>
+        </div>
+
+        <div data-channel="4" class="col-md-2 lighting-btn">
+            <div class="icon"><i class="fas fa-sun"></i></div>
+            <span>4</span>
+        </div>
+
+        <div data-channel="5" class="col-md-2 lighting-btn">
+            <div class="icon"><i class="fas fa-sun"></i></div>
+            <span>5</span>
+        </div>
+
+        <div data-channel="6" class="col-md-2 lighting-btn">
+            <div class="icon"><i class="fas fa-sun"></i></div>
+            <span>6</span>
+        </div>
+
+        <div data-channel="7" class="col-md-2 lighting-btn">
+            <div class="icon"><i class="fas fa-sun"></i></div>
+            <span>7</span>
+        </div>
+
+        <div data-channel="8" class="col-md-2 lighting-btn">
+            <div class="icon"><i class="fas fa-moon"></i></div>
+            <span>8</span>
+        </div>
+
+        <div data-channel="9" class="col-md-2 lighting-btn">
+            <div class="icon"><i class="fas fa-moon"></i></div>
+            <span>9</span>
+        </div>
+
+    </div>
+    <div class="row">
+        <div id="lighting-channel-editor"></div>
+    </div>
+
 </div>	

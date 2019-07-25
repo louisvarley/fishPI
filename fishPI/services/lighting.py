@@ -48,12 +48,16 @@ def set_brightness(channel, percentage):
     return fishPI.services.database.set_meta(light_channel_meta(channel),str(percentage))
     
 
-def flash_channel(channel):
+def flash(channel):
         pi_blaster(channel_to_pin(channel), 0)
         pi_blaster(channel_to_pin(channel), 100)
         pi_blaster(channel_to_pin(channel), 0)
+        pi_blaster(channel_to_pin(channel), get_brightness(channel).value)
 
 def pi_blaster(pin,percentage):
+
+    if(isinstance(percentage, str)):
+        percentage = int(percentage)
 
     if(percentage > 100):
         percentage = 100

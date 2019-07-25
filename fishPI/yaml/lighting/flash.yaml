@@ -1,0 +1,8 @@
+    tags:
+      - Lighting
+    parameters:
+      - name: channel
+        in: query
+        type: integer
+        required: true
+        description: Channel Number

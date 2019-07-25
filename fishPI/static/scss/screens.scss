@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Jura&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Jura:300,400,500,600,700&display=swap');
 /* Body and Containers */
 
 
@@ -173,16 +173,31 @@ i, button, span{
 .active p,span{color: #fff  !important;}
 .disabled p,span{color: #efefef !important;}
 
+/* Buttons */
+
+.btn-primary, .btn-primary:hover {
+    background-color: #01ba9a;
+    border: 1px solid #01ba9a;
+    color:#fff;
+}
+
+.btn {
+    font-size: 20px;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.dropdown-menu{
+    background:none;
+}
 
 /* Lighting */
-
-.lighting-btn{
-	text-align:center;
-	background-color: #3c3c3c; 
-	padding-top:20px;
-	padding-bottom: 20px;
-	width:100%;
-	max-width: 10%;
+.lighting-btn {
+    text-align: center;
+    background-color: #3c3c3c;
+    padding-top: 20px;
+    float: left;
+    padding-bottom: 20px;
 }
 
 .lighting-btn i{
@@ -208,22 +223,51 @@ i, button, span{
 	color:#fff;
 }
 
-.lighting-channels{
-	width:910px;
+.lighting-channels {
+    white-space: nowrap;
+    display: inline-block;
 }
 
-#lighting-channel-editor{
-width:1000px;
-height:650px;
-margin-top:50px;
+#lighting-channel-editor {
+    width: 100%;
+    height: 450px;
+    margin:50px;
 }
 
+#lighting-options {
+    position: absolute;
+    top: 120px;
+    z-index: 99;
+}
+
+#btn-lighting-actions {
+    display: none;
+}
+
+/* Toasts */
+
+.toast {
+    max-width: 350px;
+    overflow: hidden;
+    font-size: .875rem;
+    background-color: rgba(255,255,255,.85);
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 .25rem .75rem rgba(0,0,0,.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    opacity: 1;
+    position:absolute;
+    z-index:999999;
+    right:90px;
+    top:20px;
+    border-radius: .25rem;
+}
 
 /* Misc */
-
 #notice-bar {
-    -ms-overflow-style: none;  // IE 10+
-    scrollbar-width: none;  // Firefox
+    -ms-overflow-style: none; // IE 10+
+    scrollbar-width: none; // Firefox
 }
 #notice-bar::-webkit-scrollbar { 
     display: none;  // Safari and Chrome

@@ -55,3 +55,11 @@ def set_schedule():
 
     return jsonify(response="success")
 
+@fishPI.app.route('/api/lighting/flash/', methods=['GET'])
+@fishPI.load("lighting","flash")  
+def flash():
+
+    channel = request.args.get('channel')
+    fishPI.services.lighting.flash(channel)
+    return jsonify(response="success")
+

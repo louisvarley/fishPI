@@ -91,7 +91,6 @@
     <Content Include="fishPI\static\css\highchart.css" />
     <Content Include="fishPI\static\css\responsive.css" />
     <Content Include="fishPI\static\css\screens.css" />
-    <Content Include="fishPI\static\css\style - Copy.css" />
     <Content Include="fishPI\static\css\style.css" />
     <Content Include="fishPI\static\css\variables.css" />
     <Content Include="fishPI\static\js\fishpi.api.js" />
@@ -111,6 +110,8 @@
     <Content Include="fishPI\templates\system.html" />
     <Content Include="fishPI\templates\temperature.html" />
     <Content Include="fishPI\templates\water.html" />
+    <Content Include="fishPI\yaml\lighting\flash.yaml" />
+    <Content Include="fishPI\yaml\temperature\getTemperature.yaml" />
     <Content Include="setup.sh" />
     <Content Include="init.sh" />
     <Content Include="fishPI\yaml\lighting\doSchedule.yaml" />
