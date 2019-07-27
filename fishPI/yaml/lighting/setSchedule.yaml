@@ -1,3 +1,5 @@
+Set the current schedule for a given channel
+    ---
     tags:
       - Lighting
     parameters:

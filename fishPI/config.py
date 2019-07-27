@@ -18,14 +18,14 @@ app = None
 database = None
 light_pins = None
 
-def load_from_config(section, setting=None):
+def load_from_config(section, setting = None):
     config = configparser.ConfigParser()
     config.read(os.path.join(working_dir,"config.ini"))
 
     if(setting == None):
         return config.options(section)
     else:
-        return config.get(section,setting)
+        return str(config.get(str(section),str(setting)))
     
 def get_version():
     with open(os.path.join(working_dir, '__version__.py')) as f:

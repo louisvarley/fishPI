@@ -1,4 +1,4 @@
-import fishPI, subprocess, os, platform, ssl, sys
+import fishPI, subprocess, os, platform, ssl, sys, glob, ntpath, atexit
 
 from fishPI import config, logging
 from time import sleep
@@ -8,8 +8,45 @@ from flask import Flask, redirect, render_template
 from flasgger.utils import swag_from
 from flasgger import Swagger
 from multiprocessing import Process, Queue
+from apscheduler.schedulers.background import BackgroundScheduler
+
 
 #http://symbiot4.creatingo.com/
+
+
+def schedulers():
+
+    from fishPI.services import temperature, lighting, water
+
+    temperatureScheduler = BackgroundScheduler()
+    temperatureScheduler.add_job(func=temperature.log_temperature, trigger="interval", seconds=60)
+    temperatureScheduler.start()
+
+    lightingScheduler = BackgroundScheduler()
+    lightingScheduler.add_job(func=lighting.do_schedule, trigger="interval", seconds=60)
+    lightingScheduler.start()
+
+    # Shut down the scheduler when exiting the app
+    atexit.register(lambda: temperatureScheduler.shutdown())
+    atexit.register(lambda: lightingScheduler.shutdown())
+
+
+# Methods called LOAD will run everytime the app is started, for pre-filling database etc 
+def service_loaders():
+
+    from fishPI import services
+
+    services.database.load()
+
+    modules = glob.glob(os.path.join(fishPI.config.app_dir,"services","*.py"))
+    for module in modules:
+        fullModule = "fishPI.services." + ntpath.basename(module).replace(".py","")
+        i = __import__(fullModule, globals(), locals()) # returns module object
+        if hasattr(i, 'load'):
+            try:
+                eval(fullModule + '.load()')
+            except Exception as e:
+                logging.logInfo(" * Loading Service onLoad for " + fullModule + " FAILED : " + str(e))
 
 def before_launch():
     @fishPI.app.route('/api')
@@ -68,11 +105,19 @@ def main():
 
     user = os.getenv("SUDO_USER")
 
-    logging.logInfo(" * Starting " + fishPI.config.title + " [" + fishPI.config.host + ":" + str(fishPI.config.port) + "]")
-
     #Import all views, controllers, models and services 
     from fishPI import views, controllers, models, services
 
+    #Runs Service Loaders
+    logging.logInfo(" * Running Service Loaders")
+    service_loaders()
+    
+    #Runs AP Schedulers 
+    logging.logInfo(" * Starting Schedulers") 
+    schedulers()
+
+    #Run FishPI / Flask
+    logging.logInfo(" * Starting " + fishPI.config.title + " [" + fishPI.config.host + ":" + str(fishPI.config.port) + "]")
     fishPI.app.run(host=fishPI.config.host, port=fishPI.config.port, debug=True)
 
 if __name__ == '__main__':

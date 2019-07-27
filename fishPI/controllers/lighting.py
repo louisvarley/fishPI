@@ -31,6 +31,18 @@ def set_brightness():
         updated=brightness.added
     )
 
+
+
+
+@fishPI.app.route('/api/lighting/setBrightnessAll/', methods=['GET'])
+@fishPI.load("lighting","setBrightnessAll")  
+def set_brightness_all():
+
+    percentage = request.args.get('percentage')
+    fishPI.services.lighting.set_brightness_all(percentage)
+
+    return jsonify(response="success")
+
 @fishPI.app.route('/api/lighting/getSchedule/', methods=['GET'])
 @fishPI.load("lighting","getSchedule")  
 def get_schedule():
@@ -63,3 +75,9 @@ def flash():
     fishPI.services.lighting.flash(channel)
     return jsonify(response="success")
 
+@fishPI.app.route('/api/lighting/doSchedule/', methods=['GET'])
+@fishPI.load("lighting","doSchedule")  
+def do_schedule():
+
+    fishPI.services.lighting.do_schedule()   
+    return jsonify(response="success")

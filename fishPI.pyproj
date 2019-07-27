@@ -96,6 +96,8 @@
     <Content Include="fishPI\static\js\fishpi.api.js" />
     <Content Include="fishPI\static\js\fishpi.base.js" />
     <Content Include="fishPI\static\js\fishpi.lighting.js" />
+    <Content Include="fishPI\static\js\fishpi.system.js" />
+    <Content Include="fishPI\static\js\fishpi.temperature.js" />
     <Content Include="fishPI\static\scss\highchart.scss" />
     <Content Include="fishPI\static\scss\responsive.scss" />
     <Content Include="fishPI\static\scss\screens.scss" />
@@ -111,6 +113,10 @@
     <Content Include="fishPI\templates\temperature.html" />
     <Content Include="fishPI\templates\water.html" />
     <Content Include="fishPI\yaml\lighting\flash.yaml" />
+    <Content Include="fishPI\yaml\lighting\setBrightnessAll.yaml" />
+    <Content Include="fishPI\yaml\system\getSystemTemperature.yaml" />
+    <Content Include="fishPI\yaml\temperature\getTemperatureLog.yaml" />
+    <Content Include="fishPI\yaml\temperature\logTemperature.yaml" />
     <Content Include="fishPI\yaml\temperature\getTemperature.yaml" />
     <Content Include="setup.sh" />
     <Content Include="init.sh" />

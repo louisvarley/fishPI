@@ -1,3 +1,5 @@
+Set the brightness for a given channel
+    ---
     tags:
       - Lighting
     parameters:

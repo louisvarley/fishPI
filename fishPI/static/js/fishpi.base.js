@@ -1,11 +1,41 @@
 /* Initialise FishPI */
 var fishpi = {}
 
+fishpi.repeaters = {};
+
 fishpi.init = function (name, func) {
 
     jQuery(document).ready(function () {
         func();
     })
+}
+
+fishpi.repeat = function (name, interval, func, initial = true) {
+
+    if (initial) {
+        func();
+    }
+
+    fishpi.repeaters[name] = (setTimeout(function () {
+
+        func();
+        fishpi.repeat(name,interval,func,false)
+
+    }, interval));
+
+    return name;
+
+}
+
+fishpi.repeatRemove = function (name) {
+
+    if (fishpi.repeaters[name] != null) {
+        clearTimeout(fishpi.repeaters[name]);
+        fishpi.repeaters[name] = null;
+        return true;
+    }
+
+    return false;
 }
 
 fishpi.refreshScreen = function () {

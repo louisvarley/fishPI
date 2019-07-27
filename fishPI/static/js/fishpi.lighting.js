@@ -104,7 +104,6 @@ fishpi.lightScheduler = function (channel) {
 
 }
 
-
 fishpi.init('Load Channel Scheduler 1',function () {
     fishpi.lightScheduler(1)
 });
@@ -129,13 +128,12 @@ fishpi.init('Flash Light channel hook', function () {
 
     jQuery('#btn-lighting-flash').click(function () {
         
-
         fishpi.api({
             class: 'lighting',
             action: 'flash',
             get: { channel: fishpi.currentChannel },
             done: function (data) {
-                fishpi.toast('Flashing', 'Flashing Channel ' + fishpi.currentChannel);
+                fishpi.toast('Flashing', 'Flashing Channel ' + fishpi.currentChannel());
             }
         });
 

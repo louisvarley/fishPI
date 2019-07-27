@@ -1,0 +1,4 @@
+Gets a full log of the current 24 hours period starting at the current hour
+    ---
+    tags:
+      - Temperature

@@ -4,3 +4,5 @@ requests
 sh
 pbs
 werkzeug 
+W1ThermSensor
+APScheduler 

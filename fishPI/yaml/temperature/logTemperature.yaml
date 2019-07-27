@@ -1,0 +1,4 @@
+Get the current temperature and its status but also logs 
+    ---
+    tags:
+      - Temperature

@@ -1,10 +1,10 @@
-Flash a given channel to identify it
+Set the brightness for all channels
     ---
     tags:
       - Lighting
     parameters:
-      - name: channel
+      - name: percentage
         in: query
         type: integer
         required: true
-        description: Channel Number
+        description: Light Brightness Percentage

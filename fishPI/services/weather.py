@@ -1,1 +1,3 @@
 
+def load():
+    i = None;

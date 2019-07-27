@@ -1,7 +1,4 @@
-import fishPI.services.lighting
-import fishPI.services.database
 
-database.load()
-lighting.load()
-
+def load():
+    i = None;
 

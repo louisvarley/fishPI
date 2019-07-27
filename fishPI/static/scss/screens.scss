@@ -153,7 +153,7 @@ i, button, span{
 }
 
 .bg-notice{
-	background-color: #333333 !important;
+	background-color: #333333;
 }
 
 /* Screens */
@@ -172,6 +172,9 @@ i, button, span{
 
 .active p,span{color: #fff  !important;}
 .disabled p,span{color: #efefef !important;}
+
+
+
 
 /* Buttons */
 
@@ -273,7 +276,26 @@ i, button, span{
     display: none;  // Safari and Chrome
 }
 
+/* temperature */
 
 
 
+#aquarium-temperature.over {
+    background-color: #F8344B !important;
+}
 
+#aquarium-temperature.under {
+    background-color: #376EC5 !important;
+}
+
+#aquarium-temperature.error {
+    background-color: #999999 !important;
+}
+
+#system-temperature.over {
+    background-color: #F8344B !important;
+}
+
+#system-temperature.error {
+    background-color: #999999 !important;
+}
