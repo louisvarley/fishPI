@@ -8,7 +8,7 @@ fishpi.api = function (c) {
         post: null,
         dataType: "json",
         done: function () { },
-        fail: function () { alert('API Call Failure on ' + c['class'] + '/' + c['action']) }
+        fail: function () { fishpi.toast("API Error", c['class'] + '/' + c['action']) }
     };
 
     jQuery.extend(d, c);

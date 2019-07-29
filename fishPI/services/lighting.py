@@ -38,7 +38,6 @@ def set_brightness(channel, percentage):
     brightness_now = get_brightness(channel)
     current_percentage = int(brightness_now.value)
     percentage = int(percentage)
-
     pi_blaster(channel_to_pin(channel), percentage)
 
     return fishPI.services.database.set_meta(light_channel_meta(channel),str(percentage))
@@ -50,8 +49,6 @@ def flash(channel):
         pi_blaster(channel_to_pin(channel), get_brightness(channel).value)
 
 def pi_blaster(pin,percentage):
-
-    print(percentage)
 
     if(isinstance(percentage, str)):
         percentage = float(percentage)
@@ -66,7 +63,6 @@ def pi_blaster(pin,percentage):
 
     if(os.path.exists('/dev/pi-blaster')):
         subprocess.Popen('echo "{}={}" > /dev/pi-blaster'.format(pin,v), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        print('echo "{}={}" > /dev/pi-blaster'.format(pin,v))
     else:
         print('echo "{}={}" > /dev/pi-blaster'.format(pin,v))
 
@@ -76,6 +72,26 @@ def set_brightness_all(percentage):
     for i, pin in enumerate(fishPI.config.light_pins):
         channel = i+1
         set_brightness(channel,percentage)
+
+def get_brightness_average():
+
+    total = 0
+    for i, pin in enumerate(fishPI.config.light_pins):
+        channel = i+1
+        
+        total = total + int(get_brightness(channel).value)
+
+    return round((total / i),0)
+
+
+def get_brightness_all():
+
+    results = {}
+    for i, pin in enumerate(fishPI.config.light_pins):  
+        channel = i+1
+        results[channel] = (get_brightness(channel).value)
+
+    return results
 
 def do_schedule():
 
@@ -88,32 +104,15 @@ def do_schedule():
 
         schedule =  json.loads(get_schedule(channel).value)
 
-        brightnessThisHour = schedule[thisHour]
-        brightnessNextHour = schedule[nextHour]
-        brightnessNow = get_brightness(channel).value
+        brightnessThisHour = int(schedule[thisHour])
+        brightnessNextHour = int(schedule[nextHour])
 
-        print("channel " + str(channel))
-        print("brightness now " + str(brightnessNow))
-        print("brightness Next " + str(brightnessNextHour))
-        print("brightness This " + str(brightnessThisHour))
+        difference = 0 - (brightnessThisHour - brightnessNextHour)
+        differencePerMinute = difference / 60
+        differenceThisMinute = round(differencePerMinute * int(thisMinute),1)
+        newBrightness = brightnessThisHour + differenceThisMinute
 
-        brightnessThisHour = int(brightnessThisHour)
-        brightnessNextHour = int(brightnessNextHour)
-
-        if(brightnessThisHour != brightnessNextHour): 
-
-            difference = 0 - (brightnessThisHour - brightnessNextHour)
-
-            differencePerMinute = difference / 60
-
-            differenceThisMinute = round(differencePerMinute * int(thisMinute),1)
-
-            newBrightness = brightnessThisHour + differenceThisMinute
-
-            print("new brightness " + str(newBrightness))
-            print("channel " + str(channel))
-
-            set_brightness(channel,newBrightness)
+        set_brightness(channel,newBrightness)
 
 
 

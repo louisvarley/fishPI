@@ -32,16 +32,24 @@ def set_brightness():
     )
 
 
-
-
 @fishPI.app.route('/api/lighting/setBrightnessAll/', methods=['GET'])
 @fishPI.load("lighting","setBrightnessAll")  
 def set_brightness_all():
 
     percentage = request.args.get('percentage')
     fishPI.services.lighting.set_brightness_all(percentage)
-
     return jsonify(response="success")
+
+
+@fishPI.app.route('/api/lighting/getBrightnessAll/', methods=['GET'])
+@fishPI.load("lighting","getBrightnessAll")  
+def get_brightness_all():
+    return jsonify(fishPI.services.lighting.get_brightness_all())
+
+@fishPI.app.route('/api/lighting/getBrightnessAverage/', methods=['GET'])
+@fishPI.load("lighting","getBrightnessAverage")  
+def get_brightness_average():
+    return jsonify(response=fishPI.services.lighting.get_brightness_average())
 
 @fishPI.app.route('/api/lighting/getSchedule/', methods=['GET'])
 @fishPI.load("lighting","getSchedule")  

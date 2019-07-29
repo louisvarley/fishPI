@@ -1,6 +1,6 @@
 <div class="screen hide-notifications" id="lighting">
 
-    <div id="lighting-options">
+    <div id="lighting-options" style="display:none">
         <button type="button" id="btn-lighting-options" class="btn btn-lg btn-primary"><i class="fas fa-cog"></i></button>
         <div id="btn-lighting-actions" role="group">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="btn-lighting-copy" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Copy Schedule</button>
@@ -22,54 +22,155 @@
     </div>
 
     <div class="row lighting-channels" style="white-space: nowrap; display: inline-block;">
-        <div data-channel="1" class="col-md-2 lighting-btn active">
-            <div class="icon"><i class="fas fa-sun"></i></div>
+
+        <div data-channel="all" class="col-md-2 lighting-btn lighting-btn-channel lighting-btn-dashboard active">
+            <div class="icon"><i class="fas fa-percent"></i></div>
+            <span>Status</span>
+        </div>
+
+        <div data-channel="1" class="col-md-2 lighting-btn lighting-btn-channel">
+            <div class="icon"><i class="fas fa-chart-area"></i></div>
             <span>1</span>
         </div>
 
-        <div data-channel="2" class="col-md-2 lighting-btn">
-            <div class="icon"><i class="fas fa-sun"></i></div>
+        <div data-channel="2" class="col-md-2 lighting-btn lighting-btn-channel">
+            <div class="icon"><i class="fas fa-chart-area"></i></div>
             <span>2</span>
         </div>
 
-        <div data-channel="3" class="col-md-2 lighting-btn">
-            <div class="icon"><i class="fas fa-sun"></i></div>
+        <div data-channel="3" class="col-md-2 lighting-btn lighting-btn-channel">
+            <div class="icon"><i class="fas fa-chart-area"></i></div>
             <span>3</span>
         </div>
 
-        <div data-channel="4" class="col-md-2 lighting-btn">
-            <div class="icon"><i class="fas fa-sun"></i></div>
+        <div data-channel="4" class="col-md-2 lighting-btn lighting-btn-channel">
+            <div class="icon"><i class="fas fa-chart-area"></i></div>
             <span>4</span>
         </div>
 
-        <div data-channel="5" class="col-md-2 lighting-btn">
-            <div class="icon"><i class="fas fa-sun"></i></div>
+        <div data-channel="5" class="col-md-2 lighting-btn lighting-btn-channel">
+            <div class="icon"><i class="fas fa-chart-area"></i></div>
             <span>5</span>
         </div>
 
-        <div data-channel="6" class="col-md-2 lighting-btn">
-            <div class="icon"><i class="fas fa-sun"></i></div>
+        <div data-channel="6" class="col-md-2 lighting-btn lighting-btn-channel">
+            <div class="icon"><i class="fas fa-chart-area"></i></div>
             <span>6</span>
         </div>
 
-        <div data-channel="7" class="col-md-2 lighting-btn">
-            <div class="icon"><i class="fas fa-sun"></i></div>
+        <div data-channel="7" class="col-md-2 lighting-btn lighting-btn-channel">
+            <div class="icon"><i class="fas fa-chart-area"></i></div>
             <span>7</span>
         </div>
 
-        <div data-channel="8" class="col-md-2 lighting-btn">
-            <div class="icon"><i class="fas fa-moon"></i></div>
+        <div data-channel="8" class="col-md-2 lighting-btn lighting-btn-channel">
+            <div class="icon"><i class="fas fa-chart-area"></i></div>
             <span>8</span>
         </div>
 
-        <div data-channel="9" class="col-md-2 lighting-btn">
-            <div class="icon"><i class="fas fa-moon"></i></div>
+        <div data-channel="9" class="col-md-2 lighting-btn lighting-btn-channel">
+            <div class="icon"><i class="fas fa-chart-area"></i></div>
             <span>9</span>
         </div>
 
     </div>
     <div class="row">
-        <div id="lighting-channel-editor"></div>
+        <div id="lighting-channel-dashboard" style="width:100%">
+            <div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card text-white bg-notice  mb-3 lighting-dashboard-channel" data-channel="1">
+                            <div class="card-header">Channel 1</div>
+                            <div class="card-body">
+                                <div class="icon"><i class="fas fa-sun"></i></div>
+                                <h5 class="card-title">-</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card text-white bg-notice mb-3 lighting-dashboard-channel" data-channel="2">
+                            <div class="card-header">Channel 2</div>
+                            <div class="card-body">
+                                <div class="icon"><i class="fas fa-sun"></i></div>
+                                <h5 class="card-title">-</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card text-white bg-notice mb-3 lighting-dashboard-channel" data-channel="3">
+                            <div class="card-header">Channel 3</div>
+                            <div class="card-body">
+                                <div class="icon"><i class="fas fa-sun"></i></div>
+                                <h5 class="card-title">-</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div id="" class="card text-white bg-notice  mb-3 lighting-dashboard-channel" data-channel="4">
+                            <div class="card-header">Channel 4</div>
+                            <div class="card-body">
+                                <div class="icon"><i class="fas fa-sun"></i></div>
+                                <h5 class="card-title">-</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card text-white bg-notice mb-3 lighting-dashboard-channel" data-channel="5">
+                            <div class="card-header">Channel 5</div>
+                            <div class="card-body">
+                                <div class="icon"><i class="fas fa-sun"></i></div>
+                                <h5 class="card-title">-</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card text-white bg-notice mb-3 lighting-dashboard-channel" data-channel="6">
+                            <div class="card-header">Channel 6</div>
+                            <div class="card-body">
+                                <div class="icon"><i class="fas fa-sun"></i></div>
+                                <h5 class="card-title">-</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div id="" class="card text-white bg-notice  mb-3 lighting-dashboard-channel" data-channel="7">
+                            <div class="card-header">Channel 7</div>
+                            <div class="card-body">
+                                <div class="icon"><i class="fas fa-sun"></i></div>
+                                <h5 class="card-title">-</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card text-white bg-notice mb-3 lighting-dashboard-channel" data-channel="8">
+                            <div class="card-header">Channel 8</div>
+                            <div class="card-body">
+                                <div class="icon"><i class="fas fa-moon"></i></div>
+                                <h5 class="card-title">-</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card text-white bg-notice mb-3 lighting-dashboard-channel" data-channel="9">
+                            <div class="card-header">Channel 9</div>
+                            <div class="card-body">
+                                <div class="icon"><i class="fas fa-moon"></i></div>
+                                <h5 class="card-title">-</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display:none" id="lighting-channel-editor"></div>
     </div>
 
 </div>	

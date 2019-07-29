@@ -104,24 +104,28 @@ fishpi.lightScheduler = function (channel) {
 
 }
 
-fishpi.init('Load Channel Scheduler 1',function () {
-    fishpi.lightScheduler(1)
-});
-
-fishpi.init('Responsive Light Channel Buttons', function () {
+fishpi.init('Responsive Light Screen', function () {
 
     var i = jQuery('.lighting-btn').length
-    var width = Math.round(jQuery(window).width() / i) * 0.99
+    var windowWidth = jQuery(window).width()
+    var width = Math.round(windowWidth / i) * 0.98
 
     jQuery('.lighting-btn').each(function () {
         jQuery(this).width(width);
         jQuery(this).css("max-width", width);
     })
-   
+
+
+    jQuery('.lighting-dashboard-channel').each(function () {
+        jQuery(this).width(windowWidth / 3)
+        jQuery(this).css("max-width", windowWidth / 3);
+        jQuery(this).height(120)
+    })
+
 })
 
 fishpi.currentChannel = function () {
-    return jQuery('.lighting-btn').filter('.active').data('channel');
+    return jQuery('.lighting-btn-channel').filter('.active').data('channel');
 }
 
 fishpi.init('Flash Light channel hook', function () {
@@ -188,15 +192,32 @@ fishpi.init('Light Channel Button Hook', function () {
         jQuery(this).addClass('active');
 
         channel = fishpi.currentChannel();
-        jQuery('#lighting-channel-editor').fadeOut('fast',function(){
-            fishpi.lightScheduler(channel)
-            jQuery('#lighting-channel-editor').fadeIn();
-        });	
+
+        if (channel == 'all') {
+            jQuery('#lighting-options').hide();
+            jQuery('#lighting-channel-editor').fadeOut('fast', function () {
+                jQuery('#lighting-channel-dashboard').fadeIn();
+            });	
+
+        } else {
+            jQuery('#lighting-channel-dashboard').fadeOut('fast', function () {
+                jQuery('#lighting-channel-editor').fadeOut('fast', function () {
+                    fishpi.lightScheduler(channel)
+                    jQuery('#lighting-channel-editor').fadeIn();
+                    jQuery('#lighting-options').fadeIn();
+                });	
+            })
+        }
 
     });
 
 
 });
+
+fishpi.init('Light Channel Loader Hook', function () {
+
+    jQuery('#lighting-btn-dashboard').click();
+})
 
 fishpi.saveSchedule = function (data, channel) {
 
@@ -215,3 +236,55 @@ fishpi.saveSchedule = function (data, channel) {
     });
 
 }
+
+fishpi.repeat('Lighting Dashboard Show Percentages', 5000, function () {
+
+
+    fishpi.api({
+        class: 'lighting',
+        action: 'getBrightnessAll',
+        done: function (data) {
+
+            jQuery.each(data, function (i, item) {
+
+                jQuery('.lighting-dashboard-channel[data-channel="' + i + '"] .card-title').html(item + '%')
+
+            })
+
+        }
+
+    })
+})
+
+fishpi.repeat('Dashboard Lighting Average', 4000, function () {
+
+    fishpi.api({
+        class: 'lighting',
+        action: 'getBrightnessAverage',
+        done: function (data) {
+
+            if (data.response >= 70) {
+                jQuery('#lighting-status .card-title').html('Sunny');
+                jQuery('#lighting-status .icon').html('<i class="fas fa-sun"></i>')
+            }
+
+            if (data.response <= 50) {
+                jQuery('#lighting-status .card-title').html('Cloudy');
+                jQuery('#lighting-status .icon').html('<i class="fas fa-cloud-sun"></i>')
+            }
+
+            if (data.response <= 20) {
+                jQuery('#lighting-status .card-title').html('Evening');
+                jQuery('#lighting-status .icon').html('<i class="fas fa-cloud-moon"></i>')
+            }
+
+            if (data.response <= 1) {
+                jQuery('#lighting-status .card-title').html('Night');
+                jQuery('#lighting-status .icon').html('<i class="fas fa-moon"></i>')
+            }
+
+
+        }
+    })
+
+})

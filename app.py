@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import fishPI, subprocess, os, platform, ssl, sys, glob, ntpath, atexit
 
 from fishPI import config, logging
@@ -67,12 +69,16 @@ def main():
     fishPI.config.host_name = str(platform.uname()[1])
     fishPI.config.host = environ.get('SERVER_HOST', '0.0.0.0')
     fishPI.config.database = os.path.join(fishPI.config.working_dir,fishPI.config.load_from_config("instance","database_file_name"))
+    fishPI.config.log_dir = os.path.join(fishPI.config.working_dir,"logs")
 
     #INI File Config
     fishPI.config.title = fishPI.config.load_from_config("instance","title")
     fishPI.config.ui_version = fishPI.config.load_from_config("instance","swagger_ui_version")
     fishPI.config.port = fishPI.config.load_from_config("instance","port");
     fishPI.config.light_pins = fishPI.config.load_from_config("light_pins")
+
+    fishPI.config.solenoid_pin = fishPI.config.load_from_config("plug_pins","solenoid")
+    fishPI.config.rain_pin = fishPI.config.load_from_config("plug_pins","rain")
 
     ssl._create_default_https_context = ssl._create_unverified_context
 

@@ -3,18 +3,32 @@ var fishpi = {}
 
 fishpi.repeaters = {};
 
-fishpi.init = function (name, func) {
-
+fishpi.init = function(name, func) {
     jQuery(document).ready(function () {
         func();
     })
 }
 
-fishpi.repeat = function (name, interval, func, initial = true) {
+fishpi.init("auto refresh", function() {
 
-    if (initial) {
-        func();
-    }
+    (function (seconds) {
+        var refresh,
+            intvrefresh = function () {
+                clearInterval(refresh);
+                refresh = setTimeout(function () {
+                    location.href = location.href;
+                }, seconds * 1000);
+            };
+
+        $(document).on('keypress click', function () { intvrefresh() });
+        intvrefresh();
+
+    }(120)); // define here seconds
+})
+
+fishpi.repeat = function(name, interval, func, initial) {
+
+    if (initial) {func()}
 
     fishpi.repeaters[name] = (setTimeout(function () {
 
@@ -55,6 +69,17 @@ fishpi.refreshScreen = function () {
 
 }
 
+fishpi.screenChanged = function (screen, func) {
+
+    fishpi.init('screenChanged Hook for ' + screen, function () {
+        jQuery('.screen-btn').click(function () {
+            if (jQuery(this).data("screen") == screen) {
+                func()
+            }
+        })
+    })
+}
+
 fishpi.init('Screen Loader Hook',function () {
 
     fishpi.refreshScreen();
@@ -72,28 +97,15 @@ fishpi.init('Screen Loader Hook',function () {
 
 fishpi.toast = function (title, text) {
 
-    var toast = jQuery(`
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-            <strong class="mr-auto">` + title + `</strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="toast-body">
-           ` + text + `
-          </div>
-        </div>
-
-    `)
-
+    var toastHTML = '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true"><div class="toast-header"><i class="fas fa-exclamation-circle"></i> <strong class="mr-auto">' + title + '</strong><button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></div><div class="toast-body">' + text + '</div></div>';
+    var toast = jQuery(toastHTML)
     jQuery(toast).hide();
     jQuery('#main').append(toast)
     jQuery(toast).fadeIn();
 
     window.setTimeout(function () {
         jQuery('.toast').fadeOut(function () {
-            jQuery(this).remove();
+           jQuery(this).remove();
         });
     },5000)
 

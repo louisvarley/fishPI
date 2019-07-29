@@ -29,15 +29,22 @@ def load():
 def get_temperature():
 
     if(hasW1):
-        sensor = W1ThermSensor()
-        temperature = round(sensor.get_temperature(),1)
 
-        min = fishPI.config.load_from_config("temperature_warning","aquarium_min")
-        max = fishPI.config.load_from_config("temperature_warning","aquarium_max")
+        try:
+  
+            sensor = W1ThermSensor()
+            temperature = round(sensor.get_temperature(),1)
 
-        label = "normal"
-        if(temperature > float(max)): label = "over"
-        if(temperature < float(min)): label = "under"
+            min = fishPI.config.load_from_config("temperature_warning","aquarium_min")
+            max = fishPI.config.load_from_config("temperature_warning","aquarium_max")
+
+            label = "normal"
+            if(temperature > float(max)): label = "over"
+            if(temperature < float(min)): label = "under"
+
+        except:
+            label = "error"
+            temperature = "-"
 
     else:
 
