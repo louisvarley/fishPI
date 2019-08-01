@@ -9,6 +9,13 @@ Fish PI is Actually version 3 of a design for a touch interface to drive an aqua
 
 Written in Python3 and running as a flask app with a flasgger swagger API. 
 
+The App has dashboard and API controls for the following systems controlled by GPIO
+
+- Lighting (10 channels by default) 
+- Temperature sensor
+- Water flow for water changes
+- 2 GPIO controller relays used for water changes
+
 ### Hardware
 
 The hardware side is documented in a video which can be found here *link*
