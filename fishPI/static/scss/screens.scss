@@ -12,6 +12,10 @@ i, button, span{
 	text-shadow: 0px 0px 0px rgba(0, 0, 0, 1);
 }
 
+#main {
+    overflow: hidden;
+}
+
 .container {
     width: 100%;
     padding-right: 15px;
@@ -239,15 +243,14 @@ i, button, span{
 
 .lighting-dashboard-channel{
 
-    padding:20px;
 }
 .lighting-dashboard-channel .card-title, .lighting-dashboard-channel .icon {
-    float: left;
-    text-align: center;
+
 }
 
 .lighting-dashboard-channel .card-title{
     margin-left:60px;
+    font-size:35px;
 }
 
 .lighting-dashboard-channel .card-header{
