@@ -15,6 +15,8 @@ The hardware side is documented in a video which can be found here *link*
 
 ### Installation
 
+#### Downloading
+
 Clone this Repo into an installation location such as 
 
 `/usr/share/fishpi`
@@ -22,11 +24,15 @@ Clone this Repo into an installation location such as
 Within the fishpi directory is a config.ini file which contains details about the pins you are using. 
 Set the pins to any GPIO you want to use, include your lighting pins and sensor pins. 
 
+#### Installing requirements
+
 If starting from NOOBS you probably wont have pip3
 `sudo apt-get python3-pip`
 
 Clone to github repo and run 
 `pip3 install -r requirements.txt`
+
+#### Root free GPIO access
 
 Install the requirements to access GPIO pins for non-root users. Create new file
 `sudo nano /etc/udev/rules.d/50-gpio.rules`
@@ -50,6 +56,8 @@ sudo adduser pi gpiouser
 
 This gives the standard PI user access to user GPIO pins without the need for root access. 
 
+#### W1 Term Sensor Lib
+
 W1ThermSensor is not installed via requirements.txt as it is available for certain OS but will cause errors if 
 it was unable to find it the sensor installed. 
 
@@ -57,7 +65,9 @@ Install manually if you are running on a Raspberry PI
 
 `pip3 install W1ThermSensor`
 
-Next we want to install pi-blaster
+#### PI Blaster
+
+Next we want to install pi-blaster which controls the PWM via software for lighting controls
 
 [Follow the instrutions to build](https://github.com/sarfata/pi-blaster)
 
@@ -73,13 +83,17 @@ and finally you want to ensure pi-blaster on boot is configured to the correct p
 
 change your list of GPIO to the same pins you have configured for your lighting channels.
 
+#### First Run
+
 You should be able to boot fishpi for the first time
 
 run `python3 /usr/share/fishpi/app.py`
 
 FishPI will automaticly setup your Database on first boot and by default is available on port 54001
 
+#### Start on Boot
 
+You can configure a systemd auto start by 
 
 
 
