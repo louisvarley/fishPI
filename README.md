@@ -47,8 +47,7 @@ Install the requirements to access GPIO pins for non-root users. Create new file
 
 insert the following
 
-ref: https://forum.up-community.org/discussion/2141/solved-tutorial-gpio-i2c-spi-access-without-root-permissions
-
+Reference: https://forum.up-community.org/discussion/2141/solved-tutorial-gpio-i2c-spi-access-without-root-permissions
 
 ` SUBSYSTEM=="gpio*", PROGRAM="/bin/sh -c '\  
     chown -R root:gpiouser /sys/class/gpio && chmod -R 770 /sys/class/gpio;\  
