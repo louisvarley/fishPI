@@ -50,10 +50,11 @@ insert the following
 ref: https://forum.up-community.org/discussion/2141/solved-tutorial-gpio-i2c-spi-access-without-root-permissions
 
 
-> SUBSYSTEM=="gpio*", PROGRAM="/bin/sh -c '\
->         chown -R root:gpiouser /sys/class/gpio && chmod -R 770 /sys/class/gpio;\
->         chown -R root:gpiouser /sys/devices/virtual/gpio && chmod -R 770 /sys/devices/virtual/gpio;\
->         chown -R root:gpiouser /sys$devpath && chmod -R 770 /sys$devpath\ '"
+` SUBSYSTEM=="gpio*", PROGRAM="/bin/sh -c '\  
+    chown -R root:gpiouser /sys/class/gpio && chmod -R 770 /sys/class/gpio;\  
+    chown -R root:gpiouser /sys/devices/virtual/gpio && chmod -R 770 /sys/devices/virtual/gpio;\  
+    chown -R root:gpiouser /sys$devpath && chmod -R 770 /sys$devpath\ '"  
+ `
 
 now run
 
