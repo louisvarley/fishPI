@@ -46,11 +46,7 @@ Install the requirements to access GPIO pins for non-root users. Create new file
 
 insert the following
 
-`SUBSYSTEM=="gpio*", PROGRAM="/bin/sh -c '\
-        chown -R root:gpiouser /sys/class/gpio && chmod -R 770 /sys/class/gpio;\
-        chown -R root:gpiouser /sys/devices/virtual/gpio && chmod -R 770 /sys/devices/virtual/gpio;\
-        chown -R root:gpiouser /sys$devpath && chmod -R 770 /sys$devpath\
-'"`
+`SUBSYSTEM=="spidev", GROUP="spiuser", MODE="0660"`
 
 now run
 
@@ -100,7 +96,25 @@ FishPI will automaticly setup your Database on first boot and by default is avai
 
 #### Start on Boot
 
-You can configure a systemd auto start by 
+You can configure a systemd auto start by copying the included fishpi.service file to
+
+`sudo cp /usr/share/fishpi/fishpi.service /lib/systemd/system/fishpi.service`
+
+`sudo chmod 644 /lib/systemd/system/fishpi.service`
+
+`sudo systemctl enable fishpi.service`
+
+`sudo systemctl daemon-reload`
+
+
+`sudo service fishpi start` 
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,4 @@
+Returns true, used to check the status of the API server
+    ---
+    tags:
+      - System

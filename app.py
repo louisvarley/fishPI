@@ -13,9 +13,7 @@ from multiprocessing import Process, Queue
 from apscheduler.schedulers.background import BackgroundScheduler
 
 
-#http://symbiot4.creatingo.com/
-
-
+#Here is listed any internal scheduled jobs
 def schedulers():
 
     from fishPI.services import temperature, lighting, water
@@ -27,6 +25,7 @@ def schedulers():
     lightingScheduler = BackgroundScheduler()
     lightingScheduler.add_job(func=lighting.do_schedule, trigger="interval", seconds=60)
     lightingScheduler.start()
+    lighting.do_schedule()
 
     # Shut down the scheduler when exiting the app
     atexit.register(lambda: temperatureScheduler.shutdown())

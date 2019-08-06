@@ -108,6 +108,7 @@ fishpi.init('Responsive Light Screen', function () {
 
     var i = jQuery('.lighting-btn').length
     var windowWidth = jQuery(window).width()
+    var windowHeight = jQuery(window).height()
     var width = Math.round(windowWidth / i) * 0.98
 
     jQuery('.lighting-btn').each(function () {
@@ -119,7 +120,7 @@ fishpi.init('Responsive Light Screen', function () {
     jQuery('.lighting-dashboard-channel').each(function () {
         jQuery(this).width(windowWidth / 3)
         jQuery(this).css("max-width", windowWidth / 3);
-        jQuery(this).height(120)
+        jQuery(this).height((windowHeight / 3) - 88)
     })
 
 })
@@ -239,7 +240,6 @@ fishpi.saveSchedule = function (data, channel) {
 
 fishpi.repeat('Lighting Dashboard Show Percentages', 5000, function () {
 
-
     fishpi.api({
         class: 'lighting',
         action: 'getBrightnessAll',
@@ -247,7 +247,14 @@ fishpi.repeat('Lighting Dashboard Show Percentages', 5000, function () {
 
             jQuery.each(data, function (i, item) {
 
-                jQuery('.lighting-dashboard-channel[data-channel="' + i + '"] .card-title').html(item + '%')
+                jQuery('.lighting-dashboard-channel[data-channel="' + i + '"] .progress-bar').width(item + '%')
+                jQuery('.lighting-dashboard-channel[data-channel="' + i + '"] .progress-bar').html(item + '%')
+
+                if (item < 1) {
+                    jQuery('.lighting-dashboard-channel[data-channel="' + i + '"] .progress-bar').hide()
+                } else {
+                    jQuery('.lighting-dashboard-channel[data-channel="' + i + '"] .progress-bar').show()
+                }
 
             })
 

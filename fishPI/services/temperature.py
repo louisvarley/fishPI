@@ -14,7 +14,7 @@ from fishPI.services import database
 try:
     from w1thermsensor import W1ThermSensor
     hasW1 = True
-except ImportError:
+except:
     hasW1 = False
 
 def load():

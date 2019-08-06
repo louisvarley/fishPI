@@ -1,6 +1,8 @@
 /* Initialise FishPI */
 var fishpi = {}
 
+fishpi.online = true;
+
 fishpi.repeaters = {};
 
 fishpi.init = function(name, func) {
@@ -16,7 +18,9 @@ fishpi.init("auto refresh", function() {
             intvrefresh = function () {
                 clearInterval(refresh);
                 refresh = setTimeout(function () {
-                    location.href = location.href;
+                    if (fishpi.online) {
+                        location.href = location.href;
+                    }
                 }, seconds * 1000);
             };
 

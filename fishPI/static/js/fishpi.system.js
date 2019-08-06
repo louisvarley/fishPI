@@ -15,3 +15,18 @@ fishpi.repeat('Dashboard System System Temperature Hook', 4000, function () {
     })
 
 })
+
+fishpi.repeat('Online Check', 5000, function () {
+
+    fishpi.api({
+        class: 'system',
+        action: 'online',
+        done: function () {
+            fishp.online = true;
+        },
+        fail: function () {
+            fishp.online = false;
+        }
+
+    })
+})

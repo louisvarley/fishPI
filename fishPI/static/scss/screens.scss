@@ -270,6 +270,16 @@ i, button, span{
     z-index: 99;
 }
 
+.progress {
+    height: 50px;
+    background-color: #3c3c3c;
+}
+
+.progress-bar {
+    background-color: #01ba9a !important;
+    font-size: 26px;
+}
+
 #btn-lighting-actions {
     display: none;
 }
@@ -306,9 +316,6 @@ i, button, span{
 }
 
 /* temperature */
-
-
-
 #aquarium-temperature.over {
     background-color: #F8344B !important;
 }
