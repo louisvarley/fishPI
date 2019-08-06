@@ -75,6 +75,15 @@ Install manually if you are running on a Raspberry PI
 
 `pip3 install W1ThermSensor`
 
+#### RPi.GPIO
+
+Same deal with RPI.GPIO. If running under windows as a test environment the lib is not available and would throw an error 
+if installed by requirements.txt. To install for Raspberry PI run
+
+`pip3 install RPi.GPIO`
+
+Without this access to GPIO for switching on relays will not work. 
+
 #### PI Blaster
 
 Next we want to install pi-blaster which controls the PWM via software for lighting controls
