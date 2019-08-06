@@ -1,6 +1,7 @@
 
 
 
+
 # FishPI 
 ## Aquarium touch screen interface and API for an
 
@@ -46,7 +47,13 @@ Install the requirements to access GPIO pins for non-root users. Create new file
 
 insert the following
 
-`SUBSYSTEM=="spidev", GROUP="spiuser", MODE="0660"`
+ref: https://forum.up-community.org/discussion/2141/solved-tutorial-gpio-i2c-spi-access-without-root-permissions
+
+
+> SUBSYSTEM=="gpio*", PROGRAM="/bin/sh -c '\
+>         chown -R root:gpiouser /sys/class/gpio && chmod -R 770 /sys/class/gpio;\
+>         chown -R root:gpiouser /sys/devices/virtual/gpio && chmod -R 770 /sys/devices/virtual/gpio;\
+>         chown -R root:gpiouser /sys$devpath && chmod -R 770 /sys$devpath\ '"
 
 now run
 
