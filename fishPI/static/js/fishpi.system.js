@@ -22,10 +22,10 @@ fishpi.repeat('Online Check', 5000, function () {
         class: 'system',
         action: 'online',
         done: function () {
-            fishp.online = true;
+            fishpi.online = true;
         },
         fail: function () {
-            fishp.online = false;
+            fishpi.online = false;
         }
 
     })

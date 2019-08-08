@@ -17,6 +17,7 @@ except ImportError:
 
 def load():
     services.database.set_initial("solenoid_state","off")
+    services.database.set_initial("water_schedule",models.water.schedule().as_json())
 
 def set_solenoid_off():
     if(hasGPIO):
@@ -38,3 +39,9 @@ def set_solenoid_on():
 
 def get_solenoid_status():
     return services.database.get_meta("solenoid_state").value
+
+def get_schedule():
+    return fishPI.services.database.get_meta("water_schedule")
+
+def set_schedule(schedule):
+    return fishPI.services.database.set_meta("water_schedule", schedule)

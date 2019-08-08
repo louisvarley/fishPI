@@ -21,6 +21,8 @@ fishpi.repeat('Dashboard Temperature Hook', 5000, function () {
 
 fishpi.screenChanged('temperature', function () {
     fishpi.graphTemperature();
+    jQuery('#temperature-graph').height(jQuery(window).height() - 100)
+    jQuery('#temperature-graph').width(jQuery(window).width())
 })
 
 

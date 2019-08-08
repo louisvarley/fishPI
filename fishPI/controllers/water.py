@@ -20,3 +20,23 @@ def set_solenoid_off():
 @fishPI.load("water","getSolenoidStatus")
 def get_solenoid_status():
     return jsonify(response=fishPI.services.water.get_solenoid_status())
+
+@fishPI.app.route('/api/water/getSchedule/', methods=['GET'])
+@fishPI.load("water","getSchedule")  
+def get_water_schedule():
+
+    schedule = fishPI.services.water.get_schedule()
+
+    return jsonify(
+        schedule=schedule.value,
+        updated=schedule.added
+    )
+
+@fishPI.app.route('/api/water/setSchedule/', methods=['POST'])
+@fishPI.load("water","setSchedule")  
+def set_water_schedule():
+
+    schedule = request.form.get('schedule')
+    fishPI.services.water.set_schedule(schedule)
+
+    return jsonify(response="success")
