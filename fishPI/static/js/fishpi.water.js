@@ -1,3 +1,16 @@
+
+fishpi.repeat("Show Water Changed", 1000, function () {
+
+    fishpi.api({
+        class: 'water',
+        action: 'getDayLitres',
+        done: function (data) {
+            jQuery('#aquarium-water-changed .text').html(fishpi.round(data.litres,1) + "L")
+        }
+    })
+
+})
+
 fishpi.repeat('Dashboard Water Solenoid', 4000, function () {
 
     fishpi.api({

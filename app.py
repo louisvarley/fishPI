@@ -18,19 +18,33 @@ def schedulers():
 
     from fishPI.services import temperature, lighting, water
 
+    #Logs Temperature every 60 seconds
     temperatureScheduler = BackgroundScheduler()
     temperatureScheduler.add_job(func=temperature.log_temperature, trigger="interval", seconds=60)
     temperatureScheduler.start()
 
+    #Runs Lighting Schedule every 60 seconds
     lightingScheduler = BackgroundScheduler()
     lightingScheduler.add_job(func=lighting.do_schedule, trigger="interval", seconds=60)
     lightingScheduler.start()
     lighting.do_schedule()
 
+    #Runs water schedule every 60 seconds
+    waterScheduler = BackgroundScheduler()
+    waterScheduler.add_job(func=water.do_schedule, trigger="interval", seconds=60)
+    waterScheduler.start()
+    water.do_schedule()
+
+    #Runs water schedule every 60 seconds
+    updateLitresHour = BackgroundScheduler()
+    updateLitresHour.add_job(func=water.update_hour_litres, trigger="interval", seconds=1)
+    updateLitresHour.start()
+
     # Shut down the scheduler when exiting the app
     atexit.register(lambda: temperatureScheduler.shutdown())
     atexit.register(lambda: lightingScheduler.shutdown())
-
+    atexit.register(lambda: waterScheduler.shutdown())
+    atexit.register(lambda: updateLitresHour.shutdown())
 
 # Methods called LOAD will run everytime the app is started, for pre-filling database etc 
 def service_loaders():
@@ -78,6 +92,7 @@ def main():
 
     fishPI.config.solenoid_pin = fishPI.config.load_from_config("plug_pins","solenoid")
     fishPI.config.rain_pin = fishPI.config.load_from_config("plug_pins","rain")
+    fishPI.config.flow_pin = fishPI.config.load_from_config("flow_pins","flow")
 
     ssl._create_default_https_context = ssl._create_unverified_context
 

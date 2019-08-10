@@ -40,3 +40,49 @@ def set_water_schedule():
     fishPI.services.water.set_schedule(schedule)
 
     return jsonify(response="success")
+
+@fishPI.app.route('/api/water/getFlowCount/', methods=['POST'])
+@fishPI.load("water","getFlowCount")  
+def get_flow_count():
+
+    count = fishPI.services.water.get_flow_count()
+
+    return jsonify(
+        count=count.value,
+        updated=count.added
+    )
+
+
+@fishPI.app.route('/api/water/getLitresTotal/', methods=['POST'])
+@fishPI.load("water","getLitresTotal")  
+def get_litres_total():
+
+    return jsonify(
+        litres=fishPI.services.water.get_litres_total()
+    )
+
+@fishPI.app.route('/api/water/getHourLitres/', methods=['GET'])
+@fishPI.load("water","getHourLitres")  
+def get_hour_litres():
+
+    return jsonify(
+        litres=fishPI.services.water.get_hour_litres()
+    )
+
+
+@fishPI.app.route('/api/water/getDayLitres/', methods=['GET'])
+@fishPI.load("water","getDayLitres")  
+def get_day_litres():
+
+    return jsonify(
+        litres=fishPI.services.water.get_day_litres()
+    )
+
+
+@fishPI.app.route('/api/water/updateHourLitres/', methods=['POST'])
+@fishPI.load("water","updateHourLitres")  
+def update_hour_litres():
+
+    return jsonify(
+        litres=fishPI.services.water.update_hour_litres()
+    )

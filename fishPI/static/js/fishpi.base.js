@@ -45,6 +45,12 @@ fishpi.repeat = function(name, interval, func, initial) {
 
 }
 
+fishpi.round = function (n, p) {
+
+    var multiplier = Math.pow(10, p || 0);
+    return Math.round(n * multiplier) / multiplier;
+}
+
 fishpi.repeatRemove = function (name) {
 
     if (fishpi.repeaters[name] != null) {

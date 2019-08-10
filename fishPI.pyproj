@@ -150,6 +150,11 @@
     <Content Include="fishPI\yaml\temperature\getTemperatureLog.yaml" />
     <Content Include="fishPI\yaml\temperature\logTemperature.yaml" />
     <Content Include="fishPI\yaml\temperature\getTemperature.yaml" />
+    <Content Include="fishPI\yaml\water\getDayLitres.yaml" />
+    <Content Include="fishPI\yaml\water\updateHourLitres.yaml" />
+    <Content Include="fishPI\yaml\water\getHourLitres.yaml" />
+    <Content Include="fishPI\yaml\water\getLitresTotal.yaml" />
+    <Content Include="fishPI\yaml\water\getFlowCount.yaml" />
     <Content Include="fishPI\yaml\water\getSolenoidStatus.yaml" />
     <Content Include="fishPI\yaml\water\getSchedule.yaml" />
     <Content Include="fishPI\yaml\water\setSolenoidOff.yaml" />
