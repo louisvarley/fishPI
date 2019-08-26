@@ -87,8 +87,14 @@ i, button, span{
 	margin-right:auto;
 }
 
-.time{font-weight:bold; color: #fff; float:left; text-align:center; margin-right:10px; }
-.date{color: #fff; float:left; text-align:center; margin-right:10px;}
+#time{font-weight:bold; color: #fff; float:left; text-align:center; margin-right:10px; }
+#date{color: #fff; float:left; text-align:center; margin-right:10px;}
+
+#status {
+    float: left;
+    color: #fff;
+    margin-left: 30px;
+}
 
 /* Notice Bar */
 

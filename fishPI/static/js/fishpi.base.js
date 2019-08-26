@@ -121,3 +121,18 @@ fishpi.toast = function (title, text) {
 
 
 }
+
+fishpi.repeat("Time and Date", 1000, function () {
+
+    monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes();
+    var date = monthNames[today.getMonth()] + ' ' + today.getDate();
+
+    jQuery('#time').html(time);
+    jQuery('#date').html(date)
+
+}, true)

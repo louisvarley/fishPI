@@ -238,7 +238,7 @@ fishpi.saveSchedule = function (data, channel) {
 
 }
 
-fishpi.repeat('Lighting Dashboard Show Percentages', 5000, function () {
+fishpi.repeat('Lighting Dashboard Show Percentages', 60000, function () {
 
     fishpi.api({
         class: 'lighting',
@@ -248,7 +248,13 @@ fishpi.repeat('Lighting Dashboard Show Percentages', 5000, function () {
             jQuery.each(data, function (i, item) {
 
                 jQuery('.lighting-dashboard-channel[data-channel="' + i + '"] .progress-bar').width(item + '%')
-                jQuery('.lighting-dashboard-channel[data-channel="' + i + '"] .progress-bar').html(item + '%')
+
+                if (item > 10) {
+                    jQuery('.lighting-dashboard-channel[data-channel="' + i + '"] .progress-bar').html(item + '%')
+                } else {
+                    jQuery('.lighting-dashboard-channel[data-channel="' + i + '"] .progress-bar').html('')
+
+                }
 
                 if (item < 1) {
                     jQuery('.lighting-dashboard-channel[data-channel="' + i + '"] .progress-bar').hide()
@@ -261,9 +267,9 @@ fishpi.repeat('Lighting Dashboard Show Percentages', 5000, function () {
         }
 
     })
-})
+}, true)
 
-fishpi.repeat('Dashboard Lighting Average', 4000, function () {
+fishpi.repeat('Dashboard Lighting Average', 60000, function () {
 
     fishpi.api({
         class: 'lighting',
@@ -294,4 +300,4 @@ fishpi.repeat('Dashboard Lighting Average', 4000, function () {
         }
     })
 
-})
+}, true)

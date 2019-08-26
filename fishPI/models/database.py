@@ -1,3 +1,6 @@
+
+from datetime import datetime
+
 class meta():
     
     key = None
@@ -8,5 +11,8 @@ class meta():
         
         self.key = key
         self.value = value
-        self.added = added
+        self.added = datetime.strptime(added, '%Y-%m-%d %H:%M:%S')
+
+   
+
 

@@ -38,6 +38,11 @@ def set_brightness(channel, percentage):
     brightness_now = get_brightness(channel)
     current_percentage = int(brightness_now.value)
     percentage = int(percentage)
+
+    override = fishPI.services.database.get_meta("lighting_override").value
+
+    if(int(override) > 0): percentage = override
+
     pi_blaster(channel_to_pin(channel), percentage)
 
     return fishPI.services.database.set_meta(light_channel_meta(channel),str(percentage))

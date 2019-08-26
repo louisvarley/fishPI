@@ -1,17 +1,17 @@
 
-fishpi.repeat("Show Water Changed", 1000, function () {
+fishpi.repeat("Show Water Changed", 30000, function () {
 
     fishpi.api({
         class: 'water',
-        action: 'getDayLitres',
+        action: 'getWaterDay',
         done: function (data) {
             jQuery('#aquarium-water-changed .text').html(fishpi.round(data.litres,1) + "L")
         }
     })
 
-})
+}, true)
 
-fishpi.repeat('Dashboard Water Solenoid', 4000, function () {
+fishpi.repeat('Dashboard Water Solenoid', 10000, function () {
 
     fishpi.api({
         class: 'water',
@@ -22,15 +22,17 @@ fishpi.repeat('Dashboard Water Solenoid', 4000, function () {
 
             if (data.response == "off") {
                 jQuery('#solenoid-status').removeClass("active")
+                jQuery('#solenoid-status i').removeClass("fa-spin")
             }
 
             if (data.response == "on") {
                 jQuery('#solenoid-status').addClass("active")
+                jQuery('#solenoid-status i').addClass("fa-spin")
             }
         }
     })
 
-})
+}, true)
 
 fishpi.screenChanged('water', function () {
     fishpi.waterScheduler();
@@ -43,7 +45,7 @@ fishpi.waterScheduler = function () {
 
     fishpi.api({
         class: 'water',
-        action: 'getSchedule',
+        action: 'getWaterSchedule',
         done: function (data) {
 
             var times = []
@@ -100,7 +102,8 @@ fishpi.waterScheduler = function () {
                                 }
                             }
                         },
-                        stickyTracking: false,
+                        stickyTracking: true,
+                        cursor: 'move',
                         marker: {
                             enabled: true,
                             symbol: 'circle',
@@ -117,10 +120,10 @@ fishpi.waterScheduler = function () {
                 },
 
                 tooltip: {
-                    pointFormat: "Intensity: {point.y:.0f} %",
+                    pointFormat: "{point.y:.0f} Litres",
                     animation: true,
                     crosshairs: true,
-                    enabled: false,
+                    enabled: true,
                     followTouchMove: true,
                 },
 
@@ -142,7 +145,6 @@ fishpi.waterScheduler = function () {
 
 }
 
-
 fishpi.saveWaterSchedule = function (data) {
 
     var schedule = new Object();
@@ -154,7 +156,7 @@ fishpi.saveWaterSchedule = function (data) {
 
     fishpi.api({
         class: 'water',
-        action: 'setSchedule',
+        action: 'setWaterSchedule',
         post: { schedule: jsonSchedule },
     });
 

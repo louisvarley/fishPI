@@ -1,0 +1,10 @@
+Get the total water changed litres
+    ---
+    tags:
+      - Water
+    parameters:
+      - name: state
+        in: query
+        type: string
+        required: true
+        description: State

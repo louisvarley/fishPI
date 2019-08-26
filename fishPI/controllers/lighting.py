@@ -83,9 +83,9 @@ def flash():
     fishPI.services.lighting.flash(channel)
     return jsonify(response="success")
 
-@fishPI.app.route('/api/lighting/doSchedule/', methods=['GET'])
-@fishPI.load("lighting","doSchedule")  
-def do_schedule():
+@fishPI.app.route('/api/lighting/doLightingSchedule/', methods=['GET'])
+@fishPI.load("lighting","doLightingSchedule")  
+def do_lighting_schedule():
 
     fishPI.services.lighting.do_schedule()   
     return jsonify(response="success")

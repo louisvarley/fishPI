@@ -1,4 +1,4 @@
-fishpi.repeat('Dashboard Temperature Hook', 5000, function () {
+fishpi.repeat('Dashboard Temperature Hook', 60000, function () {
 
     fishpi.api({
         class: 'temperature',
@@ -14,7 +14,7 @@ fishpi.repeat('Dashboard Temperature Hook', 5000, function () {
         }
     })
 
-})
+}, true)
 
 
 
@@ -27,7 +27,6 @@ fishpi.screenChanged('temperature', function () {
 
 
 fishpi.graphTemperature = function () {
-
 
     jQuery('#temperature-graph').fadeOut("fast");
 

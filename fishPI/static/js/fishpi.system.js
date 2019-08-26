@@ -1,4 +1,4 @@
-fishpi.repeat('Dashboard System System Temperature Hook', 4000, function () {
+fishpi.repeat('Dashboard System System Temperature Hook', 60000, function () {
 
     fishpi.api({
         class: 'system',
@@ -14,19 +14,23 @@ fishpi.repeat('Dashboard System System Temperature Hook', 4000, function () {
         }
     })
 
-})
+}, true)
 
-fishpi.repeat('Online Check', 5000, function () {
+fishpi.repeat("Online Check", 30000, function () {
 
     fishpi.api({
         class: 'system',
         action: 'online',
         done: function () {
+
             fishpi.online = true;
+            jQuery('#status i').removeClass('fa-times-circle').addClass('fa-check-circle');
+
         },
         fail: function () {
-            fishpi.online = false;
-        }
 
+            fishpi.online = false;
+            jQuery('#status i').removeClass('fa-check-circle').addClass('fa-times-circle');
+        }
     })
-})
+}, true)

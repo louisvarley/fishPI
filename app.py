@@ -16,35 +16,50 @@ from apscheduler.schedulers.background import BackgroundScheduler
 #Here is listed any internal scheduled jobs
 def schedulers():
 
-    from fishPI.services import temperature, lighting, water
+    from fishPI.services import temperature, lighting, water, ambients
 
     #Logs Temperature every 60 seconds
-    temperatureScheduler = BackgroundScheduler()
-    temperatureScheduler.add_job(func=temperature.log_temperature, trigger="interval", seconds=60)
-    temperatureScheduler.start()
+    temperature_scheduler = BackgroundScheduler()
+    temperature_scheduler.add_job(func=temperature.log_temperature, trigger="interval", seconds=60)
+    temperature_scheduler.start()
 
     #Runs Lighting Schedule every 60 seconds
-    lightingScheduler = BackgroundScheduler()
-    lightingScheduler.add_job(func=lighting.do_schedule, trigger="interval", seconds=60)
-    lightingScheduler.start()
+    lighting_scheduler = BackgroundScheduler()
+    lighting_scheduler.add_job(func=lighting.do_schedule, trigger="interval", seconds=60)
+    lighting_scheduler.start()
     lighting.do_schedule()
 
     #Runs water schedule every 60 seconds
-    waterScheduler = BackgroundScheduler()
-    waterScheduler.add_job(func=water.do_schedule, trigger="interval", seconds=60)
-    waterScheduler.start()
-    water.do_schedule()
+    water_scheduler = BackgroundScheduler()
+    water_scheduler.add_job(func=water.do_water_schedule, trigger="interval", seconds=60)
+    water_scheduler.start()
+
+    #Runs water saftey switch off every 30 seconds
+    water_saftey = BackgroundScheduler()
+    water_saftey.add_job(func=water.set_solenoid_off, trigger="interval", seconds=30)
+    water_saftey.start()
 
     #Runs water schedule every 60 seconds
-    updateLitresHour = BackgroundScheduler()
-    updateLitresHour.add_job(func=water.update_hour_litres, trigger="interval", seconds=1)
-    updateLitresHour.start()
+    update_litres_hour = BackgroundScheduler()
+    update_litres_hour.add_job(func=water.update_water_hour, trigger="interval", seconds=1)
+    update_litres_hour.start()
+
+    #Clear any ambients set
+    clear_ambients = BackgroundScheduler()
+    clear_ambients.add_job(func=ambients.clear_ambients, trigger="interval", seconds=60)
+    clear_ambients.start()
+
+
 
     # Shut down the scheduler when exiting the app
-    atexit.register(lambda: temperatureScheduler.shutdown())
-    atexit.register(lambda: lightingScheduler.shutdown())
-    atexit.register(lambda: waterScheduler.shutdown())
-    atexit.register(lambda: updateLitresHour.shutdown())
+    atexit.register(lambda: temperature_scheduler.shutdown())
+    atexit.register(lambda: lighting_scheduler.shutdown())
+    atexit.register(lambda: water_scheduler.shutdown())
+    atexit.register(lambda: update_litres_hour.shutdown())
+    atexit.register(lambda: clear_ambients.shutdown())
+    atexit.register(lambda: water_saftey.shutdown())
+
+
 
 # Methods called LOAD will run everytime the app is started, for pre-filling database etc 
 def service_loaders():
@@ -138,7 +153,7 @@ def main():
 
     #Run FishPI / Flask
     logging.logInfo(" * Starting " + fishPI.config.title + " [" + fishPI.config.host + ":" + str(fishPI.config.port) + "]")
-    fishPI.app.run(host=fishPI.config.host, port=fishPI.config.port, debug=True)
+    fishPI.app.run(host=fishPI.config.host, port=fishPI.config.port, debug=False)
 
 if __name__ == '__main__':
     main()

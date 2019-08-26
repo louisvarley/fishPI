@@ -34,6 +34,7 @@
     <Compile Include="fishPI\controllers\lighting.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="fishPI\controllers\ambients.py" />
     <Compile Include="fishPI\controllers\system.py" />
     <Compile Include="fishPI\controllers\temperature.py" />
     <Compile Include="fishPI\controllers\water.py" />
@@ -54,6 +55,7 @@
     <Compile Include="fishPI\models\lighting.py" />
     <Compile Include="fishPI\models\__init__.py" />
     <Compile Include="fishPI\services\database.py" />
+    <Compile Include="fishPI\services\ambients.py" />
     <Compile Include="fishPI\services\lighting.py" />
     <Compile Include="fishPI\services\temperature.py" />
     <Compile Include="fishPI\services\water.py" />
@@ -83,7 +85,7 @@
     <Folder Include="fishPI\templates\" />
     <Folder Include="fishPI\yaml\lighting\" />
     <Folder Include="fishPI\yaml\database\" />
-    <Folder Include="fishPI\yaml\weather\" />
+    <Folder Include="fishPI\yaml\ambients\" />
     <Folder Include="fishPI\yaml\water\" />
     <Folder Include="fishPI\yaml\temperature\" />
     <Folder Include="fishPI\yaml\system\" />
@@ -141,6 +143,7 @@
     <Content Include="fishPI\templates\system.html" />
     <Content Include="fishPI\templates\temperature.html" />
     <Content Include="fishPI\templates\water.html" />
+    <Content Include="fishPI\yaml\ambients\setAmbientsCloudy.yaml" />
     <Content Include="fishPI\yaml\lighting\flash.yaml" />
     <Content Include="fishPI\yaml\lighting\getBrightnessAverage.yaml" />
     <Content Include="fishPI\yaml\lighting\getBrightnessAll.yaml" />
@@ -150,21 +153,27 @@
     <Content Include="fishPI\yaml\temperature\getTemperatureLog.yaml" />
     <Content Include="fishPI\yaml\temperature\logTemperature.yaml" />
     <Content Include="fishPI\yaml\temperature\getTemperature.yaml" />
-    <Content Include="fishPI\yaml\water\getDayLitres.yaml" />
-    <Content Include="fishPI\yaml\water\updateHourLitres.yaml" />
-    <Content Include="fishPI\yaml\water\getHourLitres.yaml" />
-    <Content Include="fishPI\yaml\water\getLitresTotal.yaml" />
-    <Content Include="fishPI\yaml\water\getFlowCount.yaml" />
+    <Content Include="fishPI\yaml\water\doWaterSchedule.yaml" />
+    <Content Include="fishPI\yaml\water\getWaterLog.yaml" />
+    <Content Include="fishPI\yaml\water\getWaterDay.yaml" />
+    <Content Include="fishPI\yaml\water\getWaterRemainingThisDay.yaml" />
+    <Content Include="fishPI\yaml\water\getWaterRemainingThisHour.yaml" />
+    <Content Include="fishPI\yaml\water\getWaterState.yaml" />
+    <Content Include="fishPI\yaml\water\setWaterState.yaml" />
+    <Content Include="fishPI\yaml\water\updateWaterHour.yaml" />
+    <Content Include="fishPI\yaml\water\getWaterHour.yaml" />
+    <Content Include="fishPI\yaml\water\getWaterTotal.yaml" />
+    <Content Include="fishPI\yaml\water\getWaterTicks.yaml" />
     <Content Include="fishPI\yaml\water\getSolenoidStatus.yaml" />
-    <Content Include="fishPI\yaml\water\getSchedule.yaml" />
+    <Content Include="fishPI\yaml\water\getWaterSchedule.yaml" />
     <Content Include="fishPI\yaml\water\setSolenoidOff.yaml" />
     <Content Include="fishPI\yaml\water\setSolenoidOn.yaml" />
-    <Content Include="fishPI\yaml\lighting\doSchedule.yaml" />
+    <Content Include="fishPI\yaml\lighting\doLightingSchedule.yaml" />
     <Content Include="fishPI\yaml\lighting\setSchedule.yaml" />
     <Content Include="fishPI\yaml\lighting\getSchedule.yaml" />
     <Content Include="fishPI\yaml\lighting\setBrightness.yaml" />
     <Content Include="fishPI\yaml\lighting\getBrightness.yaml" />
-    <Content Include="fishPI\yaml\water\setSchedule.yaml" />
+    <Content Include="fishPI\yaml\water\setWaterSchedule.yaml" />
     <Content Include="README.md" />
     <Content Include="requirements.txt" />
     <Content Include="fishPI\templates\dashboard.html" />

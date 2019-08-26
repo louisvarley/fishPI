@@ -56,7 +56,7 @@ def get_temperature():
 def log_temperature():
 
     log = get_temperature_log()
-    hour = time.strftime("%H")
+    hour = str(int(str(time.strftime("%H"))))
     temperature = get_temperature()
     log[hour] = temperature['temperature']
 

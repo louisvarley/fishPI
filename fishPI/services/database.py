@@ -4,7 +4,9 @@ import fishPI.models.database
 import sqlite3
 import os
 
+
 from sqlite3 import Error
+from datetime import datetime
 from fishPI import logging
 from fishPI import services
 from fishPI import config
@@ -65,14 +67,12 @@ def set_meta(key, value, unique = True, if_not_exists = False):
     key = str(key)
     value = str(value)
 
-
-
     if(key_count(key) > 0 and if_not_exists):
         return True
 
     if(unique and key_count(key) > 0):
-        meta = (value, key)
-        sql = ''' UPDATE meta set value = ? where key = ? '''
+        meta = (value, datetime.now().strftime('%Y-%m-%d %H:%M:%S'), key)
+        sql = ''' UPDATE meta set value = ?, added = ? where key = ? '''
         conn = create_conn()
         cur = conn.cursor()
         cur.execute(sql, meta)
