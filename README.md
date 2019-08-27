@@ -1,5 +1,6 @@
 
 
+![Screenshot1](screenshots/1.png)
 
 
 # FishPI 
@@ -17,9 +18,23 @@ The App has dashboard and API controls for the following systems controlled by G
 - Water flow for water changes
 - 2 GPIO controller relays used for water changes
 
+### Features
+
+- Full controllable lighting schedule with a drag and drop schedule graph
+- Temperature logging to a graph
+- Automatic per-hour water changes scheduled by a drag and drog graph. Managed by switching on a solenoid and reading given ticks from a HALL sensor, switching off when complete. 
+- Ambients, allow for SFX and immersive modes such as Storm, Rain, Cloudy, and Nature mode. 
+- Easy to see and visually pleasing dashboard with temperature, lighting information, system status etc
+
 ### Hardware
 
 The hardware side is documented in a video which can be found here *link*
+
+Essentially you can use these elements if installed and the required GPIO pins given in the config
+- 10 lighting channels (one is reserved)
+- HALL sensor for monitoring water flow
+- 2 Relays for switching on a solenoid and optional rain bar
+- Temperature sensor 
 
 ### Installation
 
@@ -126,9 +141,13 @@ You can configure a systemd auto start by copying the included fishpi.service fi
 `sudo service fishpi start` 
 
 
+#### Using FishPI
+Please see the video here for more information about using FishPI
 
 
+#### Using FishPI API
 
+You can access the swagger API dashboard by going to http://*IPADDRESS*:54001/apidocs
 
 
 
