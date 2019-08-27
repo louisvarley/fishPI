@@ -44,12 +44,15 @@ def schedulers():
     update_litres_hour.add_job(func=water.update_water_hour, trigger="interval", seconds=1)
     update_litres_hour.start()
 
-    #Clear any ambients set
+    #Clear any ambients set to expire every 60 seconds
     clear_ambients = BackgroundScheduler()
     clear_ambients.add_job(func=ambients.clear_ambients, trigger="interval", seconds=60)
     clear_ambients.start()
 
-
+    #Run any ambients every 10 seconds
+    do_ambients = BackgroundScheduler()
+    do_ambients.add_job(func=ambients.do_ambients, trigger="interval", seconds=10)
+    do_ambients.start()
 
     # Shut down the scheduler when exiting the app
     atexit.register(lambda: temperature_scheduler.shutdown())
@@ -58,7 +61,7 @@ def schedulers():
     atexit.register(lambda: update_litres_hour.shutdown())
     atexit.register(lambda: clear_ambients.shutdown())
     atexit.register(lambda: water_saftey.shutdown())
-
+    atexit.register(lambda: do_ambients.shutdown())
 
 
 # Methods called LOAD will run everytime the app is started, for pre-filling database etc 

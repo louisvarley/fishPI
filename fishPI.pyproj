@@ -73,6 +73,10 @@
     <Folder Include="fishPI\" />
     <Folder Include="fishPI\controllers\" />
     <Folder Include="fishPI\models\" />
+    <Folder Include="fishPI\sounds\" />
+    <Folder Include="fishPI\sounds\nature\" />
+    <Folder Include="fishPI\sounds\rainy\" />
+    <Folder Include="fishPI\sounds\stormy\" />
     <Folder Include="fishPI\static\css\" />
     <Folder Include="fishPI\static\css\bootstrap\" />
     <Folder Include="fishPI\static\js\" />
@@ -123,6 +127,7 @@
     <Content Include="fishPI\static\js\fishpi.api.js" />
     <Content Include="fishPI\static\js\fishpi.base.js" />
     <Content Include="fishPI\static\js\fishpi.lighting.js" />
+    <Content Include="fishPI\static\js\fishpi.ambients.js" />
     <Content Include="fishPI\static\js\fishpi.water.js" />
     <Content Include="fishPI\static\js\fishpi.system.js" />
     <Content Include="fishPI\static\js\fishpi.temperature.js" />
@@ -143,6 +148,13 @@
     <Content Include="fishPI\templates\system.html" />
     <Content Include="fishPI\templates\temperature.html" />
     <Content Include="fishPI\templates\water.html" />
+    <Content Include="fishPI\yaml\ambients\getAmbientsStatus.yaml" />
+    <Content Include="fishPI\yaml\ambients\getLightingOverride.yaml" />
+    <Content Include="fishPI\yaml\ambients\getAmbients.yaml" />
+    <Content Include="fishPI\yaml\ambients\setAmbientsNone.yaml" />
+    <Content Include="fishPI\yaml\ambients\setAmbientsRainy.yaml" />
+    <Content Include="fishPI\yaml\ambients\setAmbientsNature.yaml" />
+    <Content Include="fishPI\yaml\ambients\setAmbientsStormy.yaml" />
     <Content Include="fishPI\yaml\ambients\setAmbientsCloudy.yaml" />
     <Content Include="fishPI\yaml\lighting\flash.yaml" />
     <Content Include="fishPI\yaml\lighting\getBrightnessAverage.yaml" />

@@ -263,3 +263,6 @@ __pycache__/
 
 env/*
 env/
+
+*.wav
+*.mp3

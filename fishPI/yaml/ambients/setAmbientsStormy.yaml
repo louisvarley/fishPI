@@ -1,0 +1,10 @@
+Set Ambients Storm
+    ---
+    tags:
+      - Ambients
+    parameters:
+      - name: duration
+        in: query
+        type: integer
+        required: true
+        description: How long in minutes?

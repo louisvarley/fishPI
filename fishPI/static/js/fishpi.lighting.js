@@ -291,7 +291,7 @@ fishpi.repeat('Dashboard Lighting Average', 60000, function () {
                 jQuery('#lighting-status .icon').html('<i class="fas fa-cloud-moon"></i>')
             }
 
-            if (data.response <= 1) {
+            if (data.response <= 10) {
                 jQuery('#lighting-status .card-title').html('Night');
                 jQuery('#lighting-status .icon').html('<i class="fas fa-moon"></i>')
             }

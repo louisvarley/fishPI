@@ -6,3 +6,4 @@ pbs
 werkzeug 
 APScheduler 
 python-dateutil
+simpleaudio
