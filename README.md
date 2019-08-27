@@ -1,9 +1,9 @@
 
 
-![Screenshot1](screenshots/1.PNG)
-![Screenshot2](screenshots/2.PNG)
-![Screenshot3](screenshots/3.PNG)
-![Screenshot4](screenshots/4.PNG)
+![Screenshot1](screenshots/1.PNG  | width=100)
+![Screenshot2](screenshots/2.PNG  | width=100)
+![Screenshot3](screenshots/3.PNG  | width=100)
+![Screenshot4](screenshots/4.PNG  | width=100)
 
 # FishPI 
 ## Aquarium touch screen interface and API for an
