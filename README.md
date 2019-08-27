@@ -1,9 +1,6 @@
 
 
-![Screenshot1](screenshots/1.PNG){:height="50%" width="50%"}
-![Screenshot2](screenshots/2.PNG){:height="50%" width="50%"}
-![Screenshot3](screenshots/3.PNG){:height="50%" width="50%"}
-![Screenshot4](screenshots/4.PNG){:height="50%" width="50%"}
+![Screenshot1](screenshots/1.PNG)
 
 # FishPI 
 ## Aquarium touch screen interface and API for an
@@ -151,7 +148,8 @@ Please see the video here for more information about using FishPI
 
 You can access the swagger API dashboard by going to http://*IPADDRESS*:54001/apidocs
 
-
-
+![Screenshot2](screenshots/2.PNG)
+![Screenshot3](screenshots/3.PNG)
+![Screenshot4](screenshots/4.PNG)
 
 
