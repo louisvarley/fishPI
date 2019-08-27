@@ -6,7 +6,9 @@
 ## Aquarium touch screen interface and API for an
 
 ### Introduction
-Fish PI is Actually version 3 of a design for a touch interface to drive an aquarium with an API backend allowing it's various functions to be connected to other IOT devices if required such as google home. 
+FishPI is Actually version 3 of a design for a touch interface to drive an aquarium with an API backend allowing it's various functions to be connected to other IOT devices if required such as google home. 
+
+It's purpose was to automate a couple of tasks while looking visually pleasing in a modern home. Mainly i wanted to build something to control my lights on a schedule rather than the always on approve they came with. Secondly i wanted to automate water changes. 
 
 Written in Python3 and running as a flask app with a flasgger swagger API. 
 
@@ -34,6 +36,10 @@ Essentially you can use these elements if installed and the required GPIO pins g
 - HALL sensor for monitoring water flow
 - 2 Relays for switching on a solenoid and optional rain bar
 - Temperature sensor 
+
+Lighting can be driven by any PWM signal which can be controlled by a raspberry pi or similar. In My case, i control 24v LED light bars using 10 Mosfet Modules hooked up to various GPIO pins. 
+
+Water changes are controlled by a solenoid, a relay switches on this solenoid and is monitored by a HALL sensor. The water passes through a carbon filter to remove chlorine. It would be suitable to run via a RODI unit as well if required.
 
 ### Installation
 
@@ -122,7 +128,7 @@ You should be able to boot fishpi for the first time
 
 run `python3 /usr/share/fishpi/app.py`
 
-FishPI will automaticly setup your Database on first boot and by default is available on port 54001
+FishPI will automatically setup your Database on first boot and by default is available on port 54001
 
 #### Start on Boot
 
