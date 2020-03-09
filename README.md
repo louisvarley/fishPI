@@ -61,7 +61,7 @@ Set the pins to any GPIO you want to use, include your lighting pins and sensor 
 If starting from NOOBS you probably wont have pip3
 `sudo apt-get python3-pip`
 
-Clone to github repo and run 
+Goto your cloned github repo directory and run which installs all python3 LIBS 
 `pip3 install -r requirements.txt`
 
 #### Root free GPIO access
