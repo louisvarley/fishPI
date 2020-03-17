@@ -68,7 +68,6 @@ def play_random_sfx(sounds_dir):
                     break
 
         file_path = os.path.join(fishPI.config.app_dir, "sounds", get_ambients().value, file)
-        print("playing " + file_path)
         wave_obj = simpleaudio.WaveObject.from_wave_file(background_file_path)
         play_obj = wave_obj.play()
 
@@ -81,8 +80,7 @@ def play_random_background(sounds_dir):
                     break
 
         file_path = os.path.join(fishPI.config.app_dir, "sounds", get_ambients().value, file)
-        print("playing " + file_path)
-        wave_obj = simpleaudio.WaveObject.from_wave_file(background_file_path)
+        wave_obj = simpleaudio.WaveObject.from_wave_file(file_path)
         play_obj = wave_obj.play()
 
 def do_ambients():
@@ -116,7 +114,7 @@ def clear_ambients():
 
         clear_time = set.added + timedelta(minutes=int(set.value))  
 
-        if(clear_time > datetime.now()):
+        if(datetime.now() > clear_time):
             set_ambients("none",0) 
             set_lighting_override(0)
             set_ambients_status("off")

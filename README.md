@@ -118,7 +118,9 @@ as a command. Ensure you have followed the instructions provided by sarfata to h
 and finally you want to ensure pi-blaster on boot is configured to the correct pins. You can do this by adding to your
 /etc/rc.local file
 
-`sudo pi-blaster --gpio 13,27,19,21,26,20,16,12,7,5`
+`sudo pi-blaster --gpio 13,27,19,21,26,20,16,12,7,5 --pcm`
+
+**note** the PCM is needed to ensure PI-blaster does not effect the audio channel output if you are using the 3.5mm jack or driving audio from GPIO pins
 
 change your list of GPIO to the same pins you have configured for your lighting channels.
 

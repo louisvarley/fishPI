@@ -34,6 +34,12 @@ def get_ambients_status():
         updated=status.added
     )
 
+@fishPI.app.route('/api/ambients/doAmbients/', methods=['GET'])
+@fishPI.load("ambients","doAmbients")  
+def do_ambients():
+    fishPI.services.ambients.do_ambients()
+    return jsonify({"response": "Success"})
+
 @fishPI.app.route('/api/ambients/setAmbientsNone/', methods=['GET'])
 @fishPI.load("ambients","setAmbientsNone")  
 def set_ambients_none():

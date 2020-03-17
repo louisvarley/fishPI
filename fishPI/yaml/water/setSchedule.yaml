@@ -1,0 +1,10 @@
+Set the current schedule for a water changes
+    ---
+    tags:
+      - Water
+    parameters:
+      - name: schedule
+        in: body
+        type: string
+        required: true
+        description: schedule

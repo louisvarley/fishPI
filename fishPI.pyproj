@@ -151,6 +151,7 @@
     <Content Include="fishPI\yaml\ambients\getAmbientsStatus.yaml" />
     <Content Include="fishPI\yaml\ambients\getLightingOverride.yaml" />
     <Content Include="fishPI\yaml\ambients\getAmbients.yaml" />
+    <Content Include="fishPI\yaml\ambients\doAmbients.yaml" />
     <Content Include="fishPI\yaml\ambients\setAmbientsNone.yaml" />
     <Content Include="fishPI\yaml\ambients\setAmbientsRainy.yaml" />
     <Content Include="fishPI\yaml\ambients\setAmbientsNature.yaml" />
