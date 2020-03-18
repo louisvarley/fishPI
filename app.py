@@ -23,6 +23,13 @@ def schedulers():
     temperature_scheduler.add_job(func=temperature.log_temperature, trigger="interval", seconds=60)
     temperature_scheduler.start()
 
+    #Co2 On / off scheduler every 60 seconds
+    co2_scheduler = BackgroundScheduler()
+    co2_scheduler.add_job(func=water.do_co2_schedule, trigger="interval", seconds=60)
+    co2_scheduler.start()
+    water.do_co2_schedule()
+
+
     #Runs Lighting Schedule every 60 seconds
     lighting_scheduler = BackgroundScheduler()
     lighting_scheduler.add_job(func=lighting.do_schedule, trigger="interval", seconds=60)
@@ -62,7 +69,7 @@ def schedulers():
     atexit.register(lambda: clear_ambients.shutdown())
     atexit.register(lambda: water_saftey.shutdown())
     atexit.register(lambda: do_ambients.shutdown())
-
+    atexit.register(lambda: co2_scheduler.shutdown())
 
 # Methods called LOAD will run everytime the app is started, for pre-filling database etc 
 def service_loaders():
@@ -109,7 +116,7 @@ def main():
     fishPI.config.light_pins = fishPI.config.load_from_config("light_pins")
 
     fishPI.config.solenoid_pin = fishPI.config.load_from_config("plug_pins","solenoid")
-    fishPI.config.rain_pin = fishPI.config.load_from_config("plug_pins","rain")
+    fishPI.config.co2_pin = fishPI.config.load_from_config("plug_pins","co2")
     fishPI.config.flow_pin = fishPI.config.load_from_config("flow_pins","flow")
 
     ssl._create_default_https_context = ssl._create_unverified_context
@@ -156,7 +163,7 @@ def main():
 
     #Run FishPI / Flask
     logging.logInfo(" * Starting " + fishPI.config.title + " [" + fishPI.config.host + ":" + str(fishPI.config.port) + "]")
-    fishPI.app.run(host=fishPI.config.host, port=fishPI.config.port, debug=False)
+    fishPI.app.run(host=fishPI.config.host, port=fishPI.config.port, debug=True)
 
 if __name__ == '__main__':
     main()

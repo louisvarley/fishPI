@@ -11,23 +11,34 @@ fishpi.init = function(name, func) {
     })
 }
 
-fishpi.init("auto refresh", function() {
+fishpi.init("stop refresh", function () {
 
-    (function (seconds) {
-        var refresh,
-            intvrefresh = function () {
-                clearInterval(refresh);
-                refresh = setTimeout(function () {
-                    if (fishpi.online) {
-                        location.href = location.href;
-                    }
-                }, seconds * 1000);
-            };
+    $(document).keyup(function (e) {
+        if (e.key === "Escape") { // escape key maps to keycode `27`
+            alert('escaped');
+            clearInterval(reload);
+        }
+    });
 
-        $(document).on('keypress click', function () { intvrefresh() });
-        intvrefresh();
+})
 
-    }(120)); // define here seconds
+fishpi.init("auto refresh", function () {
+
+    var beginInterval = function () {
+        return setTimeout(function () {
+            if (fishpi.online) {
+                location.reload(true);
+            }
+        }, 30000);
+    }
+
+    var reload = beginInterval();
+
+    jQuery(document).on('keypress click', function () {
+        clearInterval(reload);
+        reload = beginInterval();
+    });
+
 })
 
 fishpi.repeat = function(name, interval, func, initial) {
@@ -129,7 +140,7 @@ fishpi.repeat("Time and Date", 1000, function () {
     ];
 
     var today = new Date();
-    var time = today.getHours() + ":" + today.getMinutes();
+    var time = ("0" + today.getHours()).slice(-2) + ":" + ("0" + today.getMinutes()).slice(-2)
     var date = monthNames[today.getMonth()] + ' ' + today.getDate();
 
     jQuery('#time').html(time);

@@ -18,5 +18,3 @@ def logWarning(str):
     print(str)
 
 
-
-

@@ -3,6 +3,59 @@ from fishPI import logging, services
 from fishPI.services import water
 from flask import Flask, jsonify, request
 
+@fishPI.app.route('/api/water/setCo2OffHour/', methods=['GET'])
+@fishPI.load("water","setCo2OffHour")  
+def set_co2_off_hour():
+    hour = request.args.get('hour')
+    fishPI.services.water.set_co2_off_hour(hour)
+    return jsonify(response="success")
+
+@fishPI.app.route('/api/water/setCo2OnHour/', methods=['GET'])
+@fishPI.load("water","setCo2OnHour")  
+def set_co2_on_hour():
+    hour = request.args.get('hour')
+    fishPI.services.water.set_co2_on_hour(hour)
+    return jsonify(response="success")
+
+@fishPI.app.route('/api/water/getCo2OffHour/', methods=['GET'])
+@fishPI.load("water","getCo2OffHour")  
+def get_co2_off_hour():
+    return jsonify(
+        hour=fishPI.services.water.get_co2_off_hour().value
+    )
+    return jsonify(response=fishPI.services.water.get_co2_off_hour())
+
+@fishPI.app.route('/api/water/getCo2OnHour/', methods=['GET'])
+@fishPI.load("water","getCo2OnHour")  
+def get_co2_on_hour():
+    return jsonify(
+        hour=fishPI.services.water.get_co2_on_hour().value
+    )
+
+@fishPI.app.route('/api/water/setCo2On/', methods=['GET'])
+@fishPI.load("water","setCo2On")  
+def set_co2_on():
+    fishPI.services.water.set_co2_on()
+    return jsonify(response="success")
+
+@fishPI.app.route('/api/water/setCo2Off/', methods=['GET'])
+@fishPI.load("water","setCo2Off")  
+def set_co2_off():
+    fishPI.services.water.set_co2_off()
+    return jsonify(response="success")
+
+
+@fishPI.app.route('/api/water/doCo2Schedule/', methods=['GET'])
+@fishPI.load("water","doCo2Schedule")  
+def do_co2_schedule():
+    fishPI.services.water.do_co2_schedule()
+    return jsonify(response="success")
+
+@fishPI.app.route('/api/water/getCo2Status/', methods=['GET'])
+@fishPI.load("water","getCo2Status")
+def get_co2_status():
+    return jsonify(response=fishPI.services.water.get_co2_status())
+
 @fishPI.app.route('/api/water/setSolenoidOn/', methods=['GET'])
 @fishPI.load("water","setSolenoidOn")  
 def set_solenoid_on():

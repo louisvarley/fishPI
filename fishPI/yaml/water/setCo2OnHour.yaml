@@ -1,0 +1,10 @@
+Hour to switch the co2 on
+    ---
+    tags:
+      - Water
+    parameters:
+      - name: hour
+        in: query
+        type: string
+        required: true
+        description: hour

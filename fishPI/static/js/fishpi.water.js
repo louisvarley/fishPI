@@ -34,6 +34,28 @@ fishpi.repeat('Dashboard Water Solenoid', 10000, function () {
 
 }, true)
 
+
+fishpi.repeat('Dashboard Co2', 10000, function () {
+
+    fishpi.api({
+        class: 'water',
+        action: 'getCo2Status',
+        done: function (data) {
+
+            jQuery('#co2-status .card-title').html(data.response)
+
+            if (data.response == "off") {
+                jQuery('#co2-status').removeClass("active")
+            }
+
+            if (data.response == "on") {
+                jQuery('#co2-status').addClass("active")
+            }
+        }
+    })
+
+}, true)
+
 fishpi.screenChanged('water', function () {
     fishpi.waterScheduler();
     jQuery('#water-schedule-editor').fadeIn();
@@ -161,4 +183,10 @@ fishpi.saveWaterSchedule = function (data) {
     });
 
 }
+
+fishpi.repeat('Dashboard Notifications Water Changes', 10000, function () {
+
+    
+
+})
 

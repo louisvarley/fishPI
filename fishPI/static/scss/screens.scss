@@ -99,7 +99,7 @@ i, button, span{
 /* Notice Bar */
 
 #notice-bar{
-	background-color: #3c3c3c; 	
+	background-color: #494949;
 	overflow-y:scroll;
 
 }
@@ -115,6 +115,7 @@ i, button, span{
 	border: 0px solid #fff;
 	padding: 10px 50px 10px 50px;
 	margin-top: 10px;
+	border-radius: .25rem;
 	
 }
 
@@ -312,10 +313,15 @@ i, button, span{
     width:200px;
 }
 
+#notice-bar .card{
+height:200px;
+}
+
 /* Misc */
 #notice-bar {
     -ms-overflow-style: none; // IE 10+
     scrollbar-width: none; // Firefox
+	margin-top:20px;
 }
 #notice-bar::-webkit-scrollbar { 
     display: none;  // Safari and Chrome

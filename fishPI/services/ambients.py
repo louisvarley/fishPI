@@ -96,6 +96,7 @@ def do_ambients():
     #Play random background track
     play_random_background(sounds_dir)
 
+
     #The Ambient Loop
     while( get_ambients_status().value == "on" or  get_ambients().value == "none"):
 
