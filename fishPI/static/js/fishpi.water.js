@@ -18,8 +18,6 @@ fishpi.repeat('Dashboard Water Solenoid', 10000, function () {
         action: 'getSolenoidStatus',
         done: function (data) {
 
-            jQuery('#solenoid-status .card-title').html(data.response)
-
             if (data.response == "off") {
                 jQuery('#solenoid-status').removeClass("active")
                 jQuery('#solenoid-status i').removeClass("fa-spin")
@@ -41,8 +39,6 @@ fishpi.repeat('Dashboard Co2', 10000, function () {
         class: 'water',
         action: 'getCo2Status',
         done: function (data) {
-
-            jQuery('#co2-status .card-title').html(data.response)
 
             if (data.response == "off") {
                 jQuery('#co2-status').removeClass("active")

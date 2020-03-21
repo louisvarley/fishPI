@@ -143,6 +143,15 @@ def get_water_hour():
 
     return float(ticks_to_litres(ticks_this_hour))
 
+# Get the ticks this hour
+def get_water_hour_ticks():
+    log = json.loads(fishPI.services.database.get_meta("water_log").value)
+    hour = str(int(str(time.strftime("%H"))))
+    last_hour = str(int(str( (datetime.datetime.now() + datetime.timedelta(hours = -1)).strftime("%H") )))
+    ticks_this_hour = int(log[hour]) - int(log[last_hour])
+    
+    return float(ticks_this_hour)
+
 #Get the litres this day
 def get_water_day():
 
@@ -215,7 +224,7 @@ def do_water_schedule():
 
     wc_this_hour = fishPI.services.water.get_water_remaining_this_hour()
 
-    if(wc_this_hour > 0): #Water Change is due
+    if(wc_this_hour > 0 and get_water_hour_ticks() < 2000): #Water Change is due but check ticks to make sure no over fill
 
         ticks_now = get_water_ticks().value
         ticks_finish = int(ticks_now) + int(litres_to_ticks(wc_this_hour))

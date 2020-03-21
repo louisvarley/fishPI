@@ -122,6 +122,13 @@ def get_hour_litres():
         litres=fishPI.services.water.get_water_hour()
     )
 
+@fishPI.app.route('/api/water/getWaterHourTicks/', methods=['GET'])
+@fishPI.load("water","getWaterHour")  
+def get_hour_ticks():
+    return jsonify(
+        ticks=fishPI.services.water.get_water_hour_ticks()
+    )
+
 
 @fishPI.app.route('/api/water/getWaterDay/', methods=['GET'])
 @fishPI.load("water","getWaterDay")  

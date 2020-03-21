@@ -41,9 +41,9 @@ def schedulers():
     water_scheduler.add_job(func=water.do_water_schedule, trigger="interval", seconds=60)
     water_scheduler.start()
 
-    #Runs water saftey switch off every 240 seconds
+    #Runs water saftey switch off every 500 seconds
     water_saftey = BackgroundScheduler()
-    water_saftey.add_job(func=water.set_solenoid_off, trigger="interval", seconds=240)
+    water_saftey.add_job(func=water.set_solenoid_off, trigger="interval", seconds=500)
     water_saftey.start()
 
     #Runs water schedule every 60 seconds

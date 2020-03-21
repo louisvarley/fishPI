@@ -170,6 +170,7 @@
     <Content Include="fishPI\yaml\water\doWaterSchedule.yaml" />
     <Content Include="fishPI\yaml\water\getCo2OnHour.yaml" />
     <Content Include="fishPI\yaml\water\getCo2OffHour.yaml" />
+    <Content Include="fishPI\yaml\water\getWaterHourTicks.yaml" />
     <Content Include="fishPI\yaml\water\getWaterLog.yaml" />
     <Content Include="fishPI\yaml\water\getWaterDay.yaml" />
     <Content Include="fishPI\yaml\water\getWaterRemainingThisDay.yaml" />

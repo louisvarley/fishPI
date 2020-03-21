@@ -276,27 +276,8 @@ fishpi.repeat('Dashboard Lighting Average', 60000, function () {
         action: 'getBrightnessAverage',
         done: function (data) {
 
-            if (data.response >= 70) {
-                jQuery('#lighting-status .card-title').html('Sunny');
-                jQuery('#lighting-status .icon').html('<i class="fas fa-sun"></i>')
-            }
-
-            if (data.response <= 50) {
-                jQuery('#lighting-status .card-title').html('Cloudy');
-                jQuery('#lighting-status .icon').html('<i class="fas fa-cloud-sun"></i>')
-            }
-
-            if (data.response <= 20) {
-                jQuery('#lighting-status .card-title').html('Evening');
-                jQuery('#lighting-status .icon').html('<i class="fas fa-cloud-moon"></i>')
-            }
-
-            if (data.response <= 10) {
-                jQuery('#lighting-status .card-title').html('Night');
-                jQuery('#lighting-status .icon').html('<i class="fas fa-moon"></i>')
-            }
-
-
+            jQuery('#lighting-status .text').html(data.response + '%');     
+       
         }
     })
 
