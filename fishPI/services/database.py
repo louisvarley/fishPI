@@ -3,6 +3,7 @@ import fishPI.models
 import fishPI.models.database
 import sqlite3
 import os
+import json
 
 
 from sqlite3 import Error
@@ -99,11 +100,26 @@ def get_meta(key, unique = True):
         if(unique):
             result=cur.fetchone()
             close_conn(conn)
-            return fishPI.models.database.meta(result[1],result[2],result[3])
+
+            key = result[1]
+            value = result[2]
+            added = result[3]
+
+            value = value.replace("\'", "\"")
+            if(is_json(value)):
+
+                vaue = json.dumps(json.loads(value))
+
+            return fishPI.models.database.meta(key, value, added)
         else:
-            result=cur.fetchone()
             result=cur.fetchall()
             close_conn(conn)
             return result
          
          
+def is_json(myjson):
+  try:
+    json_object = json.loads(myjson)
+  except ValueError as e:
+    return False
+  return True

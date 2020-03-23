@@ -24,9 +24,6 @@ def load():
     services.database.set_initial("water_schedule",models.water.schedule().as_json())
     services.database.set_initial("tick_count","0")
     services.database.set_initial("water_log",models.water.schedule().as_json())
-    services.database.set_initial("co2_state", "off")
-    services.database.set_initial("co2_on_hour", "10")
-    services.database.set_initial("co2_off_hour", "20")
 
     fishPI.services.water.tick_count = int(services.database.get_meta("tick_count").value)
 
@@ -35,57 +32,6 @@ def load():
         GPIO.setup(int(fishPI.config.flow_pin), GPIO.IN)
         services.water.set_solenoid_off()
         GPIO.add_event_detect(int(fishPI.config.flow_pin), GPIO.BOTH, callback=services.water.tick_pulse)
-
-#Get CO2 PIN State
-def get_co2_status():
-    return services.database.get_meta("co2_state").value
-
-#Switch off the CO2 PIN
-def set_co2_off():
-    if(hasGPIO):
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setwarnings(False)
-        GPIO.setup(int(fishPI.config.co2_pin),GPIO.OUT)
-        GPIO.output(int(fishPI.config.co2_pin),GPIO.HIGH)
-
-    services.database.set_meta("co2_state","off")
-
-#Switch on the CO2 PIN
-def set_co2_on():
-    if(hasGPIO):
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setwarnings(False)
-        GPIO.setup(int(fishPI.config.co2_pin),GPIO.OUT)
-        GPIO.output(int(fishPI.config.co2_pin),GPIO.LOW)
-        
-    services.database.set_meta("co2_state","on")
-
-def get_co2_off_hour():
-    return services.database.get_meta("co2_off_hour")
-
-def get_co2_on_hour():
-    return services.database.get_meta("co2_on_hour")
-
-def set_co2_off_hour(hour):
-    services.database.set_meta("co2_off_hour",hour)
-
-def set_co2_on_hour(hour):
-    services.database.set_meta("co2_on_hour",hour)
-
-def do_co2_schedule():
-    hour = str(int(str(time.strftime("%H"))))
-
-    on = get_co2_on_hour().value
-    off = get_co2_off_hour().value
-
-    if(int(hour) >= int(on) and int(hour) < int(off)):
-        set_co2_on()
-
-    if(int(hour) >= int(off)):
-        set_co2_off()
-
-    if(int(hour) < int(on)):
-        set_co2_off()
 
 #Switch off the Solenoid PIN
 def set_solenoid_off():
@@ -109,22 +55,11 @@ def set_solenoid_on():
 
 #Get Solenoid PIN Status
 def get_solenoid_status():
+
     return services.database.get_meta("solenoid_state").value
 
-#Get the WC Schedule
-def get_water_schedule():
-    return fishPI.services.database.get_meta("water_schedule")
-
-#Set the WC Schedule
-def set_water_schedule(schedule):
-    return fishPI.services.database.set_meta("water_schedule", schedule)
-
-#Get the WC Flow Pulse Count
-def get_water_ticks():
-    return fishPI.services.database.get_meta("tick_count")
-
-#Calculate and update ticks this hour
-def update_water_hour():
+#Update the Water Log
+def update_log():
 
     log = json.loads(fishPI.services.database.get_meta("water_log").value)
     hour = str(int(str(time.strftime("%H"))))
@@ -133,105 +68,144 @@ def update_water_hour():
     fishPI.services.database.set_meta("water_log", json.dumps(log))
     return ticks_to_litres(log[hour])
 
-#Get the litres this hour
-def get_water_hour():
+#Get the WC Log
+def get_log():
 
-    log = json.loads(fishPI.services.database.get_meta("water_log").value)
-    hour = str(int(str(time.strftime("%H"))))
-    last_hour = str(int(str( (datetime.datetime.now() + datetime.timedelta(hours = -1)).strftime("%H") )))
-    ticks_this_hour = int(log[hour]) - int(log[last_hour])
-
-    return float(ticks_to_litres(ticks_this_hour))
-
-# Get the ticks this hour
-def get_water_hour_ticks():
-    log = json.loads(fishPI.services.database.get_meta("water_log").value)
-    hour = str(int(str(time.strftime("%H"))))
-    last_hour = str(int(str( (datetime.datetime.now() + datetime.timedelta(hours = -1)).strftime("%H") )))
-    ticks_this_hour = int(log[hour]) - int(log[last_hour])
-    
-    return float(ticks_this_hour)
-
-#Get the litres this day
-def get_water_day():
-
-    log = json.loads(fishPI.services.database.get_meta("water_log").value)
-    hour = str(int(str(time.strftime("%H"))))
-    midnight = "0"
-    return float(ticks_to_litres(log[hour])) - float(ticks_to_litres(log[midnight]))
-
-def ticks_to_litres(ticks):
-    return (float(ticks) * 0.0025)
-
-def litres_to_ticks(litres):
-    return (float(litres) / 0.0025)
-
-#Get the litres total
-def get_water_total():
-    return float(ticks_to_litres(fishPI.services.database.get_meta("tick_count").value))
+    return fishPI.services.database.get_meta("water_log")
 
 #Count a pulse if the input state has changed
 def tick_pulse(caller):
-    print("called...")
+
     if GPIO.input(int(fishPI.config.flow_pin)) != fishPI.services.water.pin_state:
         fishPI.services.water.pin_state = GPIO.input(int(fishPI.config.flow_pin))
         fishPI.services.water.tick_count = int(fishPI.services.water.tick_count) + 1
         fishPI.services.database.set_meta("tick_count", fishPI.services.water.tick_count)
-        fishPI.services.water.update_water_hour()
+        fishPI.services.water.update_log()
 
-#Get the WC Log
-def get_log():
-    return fishPI.services.database.get_meta("water_log")
 
-#Get Remaining litres for this hour
-def get_water_remaining_this_hour():
-    
+
+#Get the water schedule in TICKS
+def get_water_schedule_ticks():
+
+    return fishPI.services.database.get_meta("water_schedule")
+
+#Get the water change schedule in LITRES
+def get_water_schedule_litres():
+
+    originalSchedule = get_water_schedule_ticks()
+
+    schedule = json.loads(originalSchedule.value);
+
+    for hour in schedule:
+        schedule[hour] = ticks_to_litres(schedule[hour])
+
+    return fishPI.models.database.meta("schedule",schedule,str(originalSchedule.added));
+
+#Set the water change schedule using LITRES
+def set_water_schedule_litres(schedule):
+    schedule = json.loads(schedule)
+
+    for hour in schedule:
+        schedule[hour] = litres_to_ticks(schedule[hour])
+
+    return fishPI.services.database.set_meta("water_schedule", schedule)
+
+#Get the Total Tick Count
+def get_water_total_ticks():
+
+    return fishPI.services.database.get_meta("tick_count")
+
+#Get the Total Litre Count
+def get_water_total_litres():
+
+    return int(ticks_to_litres(get_water_total_ticks()))
+
+#Get the LITRES this HOUR
+def get_water_total_hour_litres():
+
+    return float(ticks_to_litres(get_water_hour_ticks()))
+
+# Get the TICKS this HOUR
+def get_water_total_hour_ticks():
+    log = json.loads(fishPI.services.database.get_meta("water_log").value)
     hour = str(int(str(time.strftime("%H"))))
-    schedule = json.loads(fishPI.services.water.get_water_schedule().value)
+    last_hour = str(int(str( (datetime.datetime.now() + datetime.timedelta(hours = -1)).strftime("%H") )))
+    ticks_this_hour = int(log[hour]) - int(log[last_hour])
+    
+    return int(ticks_this_hour)
 
-    changed_this_hour = fishPI.services.water.get_water_hour()
+#Get the LITRES this day
+def get_water_total_day_litres():
+
+    return float(ticks_to_litres(get_water_total_day_ticks()))
+
+#Get the TICKS this day
+def get_water_total_day_ticks():
+
+    log = json.loads(fishPI.services.database.get_meta("water_log").value)
+    hour = str(int(str(time.strftime("%H"))))
+    midnight = "0"
+    return (log[hour]) - (log[midnight])
+
+#Get Ticks remaining this hour
+def get_water_ticks_remaining_hour():
+    hour = str(int(str(time.strftime("%H"))))
+    schedule = json.loads(fishPI.services.water.get_water_schedule_ticks().value)
+
+    changed_this_hour = fishPI.services.water.get_water_total_hour_ticks()
     to_change_this_hour = schedule[hour]
 
-    remaining = float(to_change_this_hour) - float(changed_this_hour)
+    remaining = int(to_change_this_hour) - int(changed_this_hour)
   
     if(remaining < 0):
         return 0
     else:
-        return float(remaining)
+        return int(remaining)
 
-def get_water_remaining_this_day():
+#Get Litres remaining this hour
+def get_water_litres_remaining_hour():
+    
+    return float(ticks_to_litres(get_water_ticks_remaining_hour()))
 
-    schedule = json.loads(fishPI.services.water.get_water_schedule().value)
-    water_changed_today = get_water_day()
+#Get Ticks remaining this day
+def get_water_ticks_remaining_day():
+
+    schedule = json.loads(fishPI.services.water.get_water_schedule_ticks().value)
+    ticks_today = get_water_total_day_ticks()
 
     total = 0
 
     for hour in schedule:
-        total = float(total) + float(schedule[hour])
+        total = int(total) + int(schedule[hour])
 
-    remaining = total - water_changed_today
+    remaining = total - ticks_today
 
     if(remaining < 0):
         return 0
     else:
         return remaining
 
+def get_water_litres_remaining_day():
+
+    return float(ticks_to_litres(get_water_ticks_remaining_day()))
+
 #Do the WC Scheduler
 def do_water_schedule():
 
+    #If Already running, do nothing
     if(get_solenoid_status() == "on"):
         return 0
 
-    wc_this_hour = fishPI.services.water.get_water_remaining_this_hour()
+    remaining_this_hour = fishPI.services.water.get_water_ticks_remaining_hour()
 
-    if(wc_this_hour > 0 and get_water_hour_ticks() < 2000): #Water Change is due but check ticks to make sure no over fill
+    if(remaining_this_hour > 0):
 
         ticks_now = get_water_ticks().value
-        ticks_finish = int(ticks_now) + int(litres_to_ticks(wc_this_hour))
+        ticks_finish = ticks_now + remaining_this_hour
 
         logging.logInfo("Changing Water {} from {} ticks to {} ticks".format(str(wc_this_hour), str(get_water_ticks().value), str(ticks_finish)))
 
-        while( int(get_water_ticks().value) < ticks_finish ):
+        while( int(get_water_total_ticks().value) < ticks_finish ):
             fishPI.services.water.set_solenoid_on()
             
         fishPI.services.water.set_solenoid_off()
@@ -240,3 +214,14 @@ def do_water_schedule():
 
         fishPI.services.water.set_solenoid_off()
         return 0
+
+#Convert TICKS to LITRES
+def ticks_to_litres(ticks):
+
+    return (float(ticks) * 0.0025)
+
+#Convert LITRES to TICKS
+def litres_to_ticks(litres):
+
+    return (int(litres) / 0.0025)
+

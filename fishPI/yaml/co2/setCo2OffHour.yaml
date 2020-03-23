@@ -1,10 +1,10 @@
-Get the total water changed litres
+Hour to switch the CO2 Off
     ---
     tags:
-      - Water
+      - CO2
     parameters:
-      - name: state
+      - name: hour
         in: query
         type: string
         required: true
-        description: State
+        description: Hour

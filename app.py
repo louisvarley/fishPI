@@ -16,7 +16,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 #Here is listed any internal scheduled jobs
 def schedulers():
 
-    from fishPI.services import temperature, lighting, water, ambients
+    from fishPI.services import temperature, lighting, water, ambients, co2
 
     #Logs Temperature every 60 seconds
     temperature_scheduler = BackgroundScheduler()
@@ -25,9 +25,9 @@ def schedulers():
 
     #Co2 On / off scheduler every 60 seconds
     co2_scheduler = BackgroundScheduler()
-    co2_scheduler.add_job(func=water.do_co2_schedule, trigger="interval", seconds=60)
+    co2_scheduler.add_job(func=co2.do_co2_schedule, trigger="interval", seconds=60)
     co2_scheduler.start()
-    water.do_co2_schedule()
+    co2.do_co2_schedule()
 
 
     #Runs Lighting Schedule every 60 seconds
@@ -47,9 +47,9 @@ def schedulers():
     water_saftey.start()
 
     #Runs water schedule every 60 seconds
-    update_litres_hour = BackgroundScheduler()
-    update_litres_hour.add_job(func=water.update_water_hour, trigger="interval", seconds=1)
-    update_litres_hour.start()
+    update_water_log = BackgroundScheduler()
+    update_water_log.add_job(func=water.update_log, trigger="interval", seconds=1)
+    update_water_log.start()
 
     #Clear any ambients set to expire every 60 seconds
     clear_ambients = BackgroundScheduler()

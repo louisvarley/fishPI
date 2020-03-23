@@ -2,6 +2,7 @@ import fishPI
 from fishPI import logging, services
 from fishPI.services import lighting
 from flask import Flask, jsonify, request
+import json
 
 @fishPI.app.route('/api/lighting/getBrightness/', methods=['GET'])
 @fishPI.load("lighting","getBrightness")  
@@ -60,7 +61,7 @@ def get_schedule():
 
     return jsonify(
         channel=channel,
-        schedule=schedule.value,
+        schedule=json.loads(schedule.value),
         updated=schedule.added
     )
 

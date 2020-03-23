@@ -1,10 +1,10 @@
-Hour to switch the CO2 Off
+Hour to switch the co2 on
     ---
     tags:
-      - Water
+      - CO2
     parameters:
       - name: hour
         in: query
         type: string
         required: true
-        description: Hour
+        description: hour

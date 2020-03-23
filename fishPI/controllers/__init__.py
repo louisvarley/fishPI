@@ -3,3 +3,4 @@ from fishPI.controllers import temperature
 from fishPI.controllers import system
 from fishPI.controllers import water
 from fishPI.controllers import ambients
+from fishPI.controllers import co2
