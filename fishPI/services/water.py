@@ -189,6 +189,22 @@ def get_water_litres_remaining_day():
 
     return float(ticks_to_litres(get_water_ticks_remaining_day()))
 
+#How much water ticks is changed per day
+def get_water_ticks_per_day():
+    schedule = json.loads(fishPI.services.water.get_water_schedule_ticks().value)
+
+    total = 0
+
+    for hour in schedule:
+        total = int(total) + int(schedule[hour])
+
+    return total
+
+#How much water litres is changed per day
+def get_water_litres_per_day():
+
+    return ticks_to_litres(get_water_ticks_per_day())
+
 #Do the WC Scheduler
 def do_water_schedule():
 

@@ -121,6 +121,20 @@ def get_water_ticks_remaining_day():
         litres=fishPI.services.water.get_water_ticks_remaining_day()
     )
 
+@fishPI.app.route('/api/water/getWaterTicksPerDay/', methods=['GET'])
+@fishPI.load("water","getWaterTicksPerDay")  
+def get_water_ticks_per_day():
+    return jsonify(
+        litres=fishPI.services.water.get_water_ticks_per_day()
+    )
+
+@fishPI.app.route('/api/water/getWaterLitresPerDay/', methods=['GET'])
+@fishPI.load("water","getWaterLitresPerDay")  
+def get_water_litres_per_day():
+    return jsonify(
+        litres=fishPI.services.water.get_water_litres_per_day()
+    )
+
 @fishPI.app.route('/api/water/doWaterSchedule/', methods=['GET'])
 @fishPI.load("water","doWaterSchedule")  
 def do_water_schedule():

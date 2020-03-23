@@ -1,7 +1,7 @@
 fishpi.repeat('Dashboard Co2', 10000, function () {
 
     fishpi.api({
-        class: 'CO2',
+        class: 'co2',
         action: 'getCo2Status',
         done: function (data) {
 

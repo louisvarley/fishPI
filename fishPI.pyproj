@@ -174,6 +174,7 @@
     <Content Include="fishPI\yaml\co2\getCo2OnHour.yaml" />
     <Content Include="fishPI\yaml\co2\getCo2OffHour.yaml" />
     <Content Include="fishPI\yaml\water\getWaterLitresRemainingHour.yaml" />
+    <Content Include="fishPI\yaml\water\getWaterLitresPerDay.yaml" />
     <Content Include="fishPI\yaml\water\getWaterTicksRemainingHour.yaml" />
     <Content Include="fishPI\yaml\water\getWaterTotalDayTicks.yaml" />
     <Content Include="fishPI\yaml\water\getWaterTotalHourTicks.yaml" />
@@ -190,6 +191,7 @@
     <Content Include="fishPI\yaml\co2\setCo2On.yaml" />
     <Content Include="fishPI\yaml\co2\setCo2OffHour.yaml" />
     <Content Include="fishPI\yaml\water\getWaterTotalHourLitres.yaml" />
+    <Content Include="fishPI\yaml\water\getWaterTicksPerDay.yaml" />
     <Content Include="fishPI\yaml\water\setWaterScheduleLitres.yaml" />
     <Content Include="fishPI\yaml\water\doWaterSchedule.yaml" />
     <Content Include="fishPI\yaml\water\updateWaterHour.yaml" />

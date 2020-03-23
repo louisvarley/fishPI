@@ -1,11 +1,31 @@
 
+fishpi.repeat("Ticks Counter", 1000, function () {
+
+    fishpi.api({
+        class: 'water',
+        action: 'getWaterTotalTicks',
+        done: function (data) {
+            jQuery('#aquarium-water-ticks .text').html(data.ticks)
+        }
+    })
+
+}, true)
+
 fishpi.repeat("Show Water Changed", 30000, function () {
 
     fishpi.api({
         class: 'water',
-        action: 'getWaterDay',
+        action: 'getWaterTotalDayLitres',
         done: function (data) {
-            jQuery('#aquarium-water-changed .text').html(fishpi.round(data.litres,1) + "L")
+            jQuery('#aquarium-water-changed .text .a').html(fishpi.round(data.litres,1) + "L")
+        }
+    })
+
+    fishpi.api({
+        class: 'water',
+        action: 'getWaterLitresPerDay',
+        done: function (data) {
+            jQuery('#aquarium-water-changed .text .o').html(fishpi.round(data.litres, 1) + "L")
         }
     })
 
